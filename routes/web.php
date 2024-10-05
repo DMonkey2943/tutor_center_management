@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,30 +17,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
-Route::get('/classes', function () {
-    return view('classes');
-})->name('classes');
+Route::get('/classes', [HomeController::class, 'classes'])->name('classes');
 
-Route::get('/class_detail', function () {
-    return view('class_detail');
-})->name('class_detail');
+Route::get('/class_detail', [HomeController::class, 'class_detail'])->name('class_detail');
 
-Route::get('/tutors', function () {
-    return view('tutors');
-})->name('tutors');
+Route::get('/tutors', [HomeController::class, 'tutors'])->name('tutors');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login.form');
+// Authentication
+Route::middleware(['guest'])->group(function () {
+    Route::get('/register/parent', [AuthController::class, 'showFormParentRegister'])->name('parentRegister.form');
+    Route::post('/register/parent', [AuthController::class, 'parentRegister'])->name('parentRegister');
 
-Route::get('/register/parent', function () {
-    return view('register_parent');
-})->name('register_parent');
+    Route::get('/register/tutor', [AuthController::class, 'showFormTutorRegister'])->name('tutorRegister.form');
+    Route::post('/register/tutor', [AuthController::class, 'tutorRegister'])->name('tutorRegister');
 
-Route::get('/register/tutor', function () {
-    return view('register_tutor');
-})->name('register_tutor');
+    Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login.form');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+});
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

@@ -20,8 +20,17 @@
                     <li class="font-weight-bold"><a href="{{ route('classes') }}">Lớp mới</a></li>
                 </ul>
 
-                <a href="{{ route('login.form') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">ĐĂNG
-                    NHẬP</a>
+                @auth
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <input type="submit" class="btn-book btn btn-secondary btn-sm menu-absolute" value="ĐĂNG XUẤT">
+                    </form>
+                @else
+                    <a href="{{ route('login.form') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">ĐĂNG
+                        NHẬP</a>
+                @endauth
+
+
 
                 <a href="#"
                     class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block d-lg-none light"

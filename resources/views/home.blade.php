@@ -5,22 +5,28 @@
         Cần Thơ</h1>
     <h1 class="mb-4 heading text-white" data-aos="fade-up" data-aos-delay="100">Uy tín - Chất
         lượng</h1>
-    <p class="mb-4" data-aos="fade-up" data-aos-delay="300">
-        <a href="{{ route('register_parent') }}" class="mb-3 ml-2 mr-2 btn btn-secondary">
-            <i class="bi bi-book-half"></i>
-            Đăng ký tìm gia sư
-        </a>
-        <a href="{{ route('register_tutor') }}" class=" mb-3 ml-2 mr-2 btn btn-secondary">
-            <i class="bi bi-briefcase-fill"></i>
-            Đăng ký làm gia sư
-        </a>
-    </p>
-    <p class="mb-4" data-aos="fade-up" data-aos-delay="300"></p>
-    <a href="register_class.html" class="mb-3 ml-2 mr-2 btn btn-secondary">
-        <i class="bi bi-plus-circle-fill"></i>
-        Đăng ký lớp học
-    </a>
-    </p>
+
+    @if (Auth::check())
+        @if (Auth::user()->role == 'parent')
+            <p class="mb-4" data-aos="fade-up" data-aos-delay="300"></p>
+            <a href="register_class.html" class="mb-3 ml-2 mr-2 btn btn-secondary">
+                <i class="bi bi-plus-circle-fill"></i>
+                Đăng ký lớp học
+            </a>
+            </p>
+        @endif
+    @else
+        <p class="mb-4" data-aos="fade-up" data-aos-delay="300">
+            <a href="{{ route('parentRegister.form') }}" class="mb-3 ml-2 mr-2 btn btn-secondary">
+                <i class="bi bi-book-half"></i>
+                Đăng ký tìm gia sư
+            </a>
+            <a href="{{ route('tutorRegister.form') }}" class=" mb-3 ml-2 mr-2 btn btn-secondary">
+                <i class="bi bi-briefcase-fill"></i>
+                Đăng ký làm gia sư
+            </a>
+        </p>
+    @endif
 @endsection
 @section('content')
     {{-- Banner --}}
@@ -64,10 +70,14 @@
                         thể tới nhà, thư viện, trường học hoặc địa điểm theo yêu cầu của học viên. Gia sư dạy theo khung
                         giờ học viên đưa ra.
                     </p>
-                    <p data-aos="fade-up" data-aos-delay="300"><a href="register_parent.html" class="btn btn-primary">
-                            <i class="bi bi-book-half"></i>
-                            Đăng ký tìm gia sư
-                        </a></p>
+                    @unless (Auth::check())
+                        <p data-aos="fade-up" data-aos-delay="300">
+                            <a href="{{ route('parentRegister.form') }}" class="btn btn-primary">
+                                <i class="bi bi-book-half"></i>
+                                Đăng ký tìm gia sư
+                            </a>
+                        </p>
+                    @endunless
                 </div>
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="0">
                     <figure class="img-wrap-2">
@@ -99,12 +109,14 @@
                         Thời gian dạy linh hoạt giúp gia sư vừa dạy vừa đảm bảo được công việc cũng như việc học tập của
                         mình
                     </p>
-                    <p data-aos="fade-up" data-aos-delay="300">
-                        <a href="register_tutor.html" class="btn btn-primary">
-                            <i class="bi bi-briefcase-fill"></i>
-                            Đăng ký làm gia sư
-                        </a>
-                    </p>
+                    @unless (Auth::check())
+                        <p data-aos="fade-up" data-aos-delay="300">
+                            <a href="{{ route('tutorRegister.form') }}" class="btn btn-primary">
+                                <i class="bi bi-briefcase-fill"></i>
+                                Đăng ký làm gia sư
+                            </a>
+                        </p>
+                    @endunless
                 </div>
             </div>
         </div>

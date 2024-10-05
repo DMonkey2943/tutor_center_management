@@ -9,13 +9,14 @@
         <div class="container">
             <div class="row mb-5 justify-content-center">
                 <div class="col-lg-5 mx-auto order-1" data-aos="fade-up" data-aos-delay="200">
-                    <form action="#" class="form-box">
+                    <form action="" method="POST" class="form-box">
+                        @csrf
                         <div class="row">
                             <div class="col-12 mb-3">
-                                <input type="text" class="form-control" placeholder="Email">
+                                <input type="text" class="form-control" name="email" placeholder="Email">
                             </div>
                             <div class="col-12 mb-3">
-                                <input type="password" class="form-control" placeholder="Mật khẩu">
+                                <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
                             </div>
                             <div class="col-12 mb-2">
                                 <input type="submit" value="Đăng nhập" class="btn btn-primary">

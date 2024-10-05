@@ -10,30 +10,31 @@
 
             <div class="row mb-5 justify-content-center">
                 <div class="col-lg-10 mx-auto order-1" data-aos="fade-up" data-aos-delay="200">
-                    <form action="#" class="form-box" enctype="multipart/form-data">
+                    <form action="" method="POST" class="form-box" enctype="multipart/form-data">
+                        @csrf
                         <h5 class="font-weight-bold">THÔNG TIN TÀI KHOẢN</h5>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputName">Họ tên</label>
-                                <input type="text" class="form-control" id="inputName">
+                                <input type="text" class="form-control" id="inputName" name="name">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPhone">SĐT</label>
-                                <input type="tel" class="form-control" id="inputPhone">
+                                <input type="tel" class="form-control" id="inputPhone" name="phone">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4">
+                                <input type="email" class="form-control" id="inputEmail4" name="email">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword4">Mật khẩu</label>
-                                <input type="password" class="form-control" id="inputPassword4">
+                                <input type="password" class="form-control" id="inputPassword4" name="password">
                             </div>
                         </div>
 
-                        <h5 class="font-weight-bold mt-4">THÔNG TIN HỒ SƠ</h5>
+                        {{-- <h5 class="font-weight-bold mt-4">THÔNG TIN HỒ SƠ</h5>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputState">Giới tính</label>
@@ -234,7 +235,7 @@
                                 <option selected>Choose...</option>
                                 <option>...</option>
                             </select>
-                        </div>
+                        </div> --}}
 
 
                         <div class="col-12">
