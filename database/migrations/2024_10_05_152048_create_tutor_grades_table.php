@@ -26,6 +26,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('tutor_grades', function (Blueprint $table) {
+            $table->dropForeign(['tt_id']); // Xóa khóa ngoại
+            $table->dropForeign(['grade_id']);
+        });
+
         Schema::dropIfExists('tutor_grades');
     }
 };

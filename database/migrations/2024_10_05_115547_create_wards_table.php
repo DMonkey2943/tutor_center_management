@@ -25,6 +25,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('wards', function (Blueprint $table) {
+            $table->dropForeign(['district_id']); // Xóa khóa ngoại
+        });
+
         Schema::dropIfExists('wards');
     }
 };

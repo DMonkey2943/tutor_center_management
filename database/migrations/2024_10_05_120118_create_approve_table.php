@@ -28,6 +28,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('approve', function (Blueprint $table) {
+            $table->dropForeign(['class_id']); // Xóa khóa ngoại
+            $table->dropForeign(['tt_id']);
+        });
+
         Schema::dropIfExists('approve');
     }
 };

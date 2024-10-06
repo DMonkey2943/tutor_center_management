@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tutor_districts', function (Blueprint $table) {
-             $table->unsignedInteger('tt_id');
+            $table->unsignedInteger('tt_id');
             $table->unsignedTinyInteger('district_id');
 
             // $table->primary(['class_id', 'tutor_id']);
@@ -26,6 +26,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tutor_districtss');
+        Schema::table('tutor_districts', function (Blueprint $table) {
+            $table->dropForeign(['tt_id']); // Xóa khóa ngoại
+            $table->dropForeign(['district_id']);
+        });
+
+        Schema::dropIfExists('tutor_districts');
     }
 };

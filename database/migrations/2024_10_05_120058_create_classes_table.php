@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->increments('class_id');
-            $table->unsignedTinyInteger('class_num_of_session');
+            $table->enum('class_num_of_students', ['1', '2', '3', '4', '5']);
+            $table->enum('class_num_of_sessions', ['1', '2', '3', '4', '5', '6', '7']);
             $table->text('class_time');
-            $table->char('class_gender_student', 1)->comment('M: male, F: female');
-            $table->string('class_school_student');
-            $table->string('class_academic_performance');
-            $table->text('class_note');
-            $table->char('class_gender_tutor', 1)->comment('M: male, F: female');
-            $table->text('class_other_request');
-            $table->tinyInteger('class_status');
+            $table->char('class_gender_tutor', 1)->nullable()->comment('M: male, F: female');
             $table->string('class_tuition');
+            $table->text('class_request')->nullable();
+            $table->tinyInteger('class_status');
             $table->unsignedInteger('class_address');
             $table->unsignedTinyInteger('class_grade');
             $table->unsignedTinyInteger('class_level')->nullable();

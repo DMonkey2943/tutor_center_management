@@ -16,20 +16,19 @@ return new class extends Migration
             $table->char('tt_gender', 1)->comment('M: male, F: female');
             $table->date('tt_birthday');
             $table->string('tt_address');
-            $table->unsignedTinyInteger('level_id');
             $table->string('tt_major');
             $table->string('tt_school');
-            $table->text('tt_achievements');
-            $table->text('tt_experiences');
+            $table->text('tt_experiences')->nullable();
             $table->string('tt_avatar');
             $table->string('tt_degree');
-            $table->unsignedTinyInteger('tuition_id')->nullable();
             $table->tinyInteger('tt_status');
+            $table->unsignedTinyInteger('level_id')->nullable();
+            $table->unsignedTinyInteger('tuition_id')->nullable();
             $table->unsignedInteger('user_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
-            $table->foreign('level_id')->references('level_id')->on('levels')->onDelete('CASCADE');
+            $table->foreign('level_id')->references('level_id')->on('levels')->onDelete('SET NULL');
             $table->foreign('tuition_id')->references('tuition_id')->on('tuitions')->onDelete('SET NULL');
         });
     }
@@ -39,6 +38,12 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('tutors', function (Blueprint $table) {
+            $table->dropForeign(['user_id']); // Xóa khóa ngoại
+            $table->dropForeign(['level_id']);
+            $table->dropForeign(['tuition_id']);
+        });
+
         Schema::dropIfExists('tutors');
     }
 };
