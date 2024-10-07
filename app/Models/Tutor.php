@@ -15,8 +15,8 @@ class Tutor extends Model
     protected $table = 'tutors';
     protected $fillable = ['tt_gender', 'tt_birthday', 
                            'tt_address', 'tt_major', 'tt_school',
-                           'tt_achievements', 'tt_experiences',
-                           'tt_avatar', 'tt_degree', 'tt_status', 
+                           'tt_avatar', 'tt_degree',
+                           'tt_experiences', 'tt_status', 
                            'level_id', 'tuition_id', 'user_id',
                           ];
     protected $guarded = ['tt_id'];

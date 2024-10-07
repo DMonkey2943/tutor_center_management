@@ -12,11 +12,9 @@ class Class1 extends Model
     use HasFactory;
 
     protected $table = 'classes';
-    protected $fillable = ['class_num_of_session', 'class_time', 
-                           'class_gender_student', 'class_school_student', 
-                           'class_academic_performance', 'class_note', 
-                           'class_gender_tutor', 'class_other_request',
-                           'class_status', 'class_tuition',  
+    protected $fillable = ['class_num_of_students', 'class_num_of_sessions', 'class_time', 
+                           'class_gender_tutor', 'class_request',
+                           'class_tuition',  'class_status', 
                            'class_address', 'class_grade', 'class_level', 
                            'class_tutor', 'class_parent',
                           ];
