@@ -23,7 +23,7 @@ class Class1 extends Model
     protected $primaryKey = 'class_id';
 
     public function address() {
-        return $this->belongsTo(Address::class, 'class_address', 'address_id');
+        return $this->belongsTo(Address::class, 'class_address', 'addr_id');
     }
 
     public function grade() {

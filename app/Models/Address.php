@@ -12,10 +12,10 @@ class Address extends Model
     use HasFactory;
 
     protected $table = 'addresses';
-    protected $fillable = ['address_detail', 'ward_id'];
-    protected $guarded = ['address_id'];
+    protected $fillable = ['addr_detail', 'ward_id'];
+    protected $guarded = ['addr_id'];
 
-    protected $primaryKey = 'address_id';
+    protected $primaryKey = 'addr_id';
 
     public $timestamps = false;
 
@@ -25,6 +25,6 @@ class Address extends Model
 
     public function class()
     {
-        return $this->hasOne(Class1::class, 'class_address', 'address_id');
+        return $this->hasOne(Class1::class, 'class_address', 'addr_id');
     }
 }
