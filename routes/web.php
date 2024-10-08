@@ -38,3 +38,4 @@ Route::middleware(['guest'])->group(function () {
 
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/wards/{district_id}', [AuthController::class, 'getWards']);

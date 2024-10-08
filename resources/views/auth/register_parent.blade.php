@@ -15,244 +15,219 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputName">Họ tên</label>
-                                <input type="text" class="form-control" id="inputName" name="name">
+                                <input type="text" class="form-control" id="inputName" name="name"
+                                    value="{{ old('name') }}">
+                                <span class="text-danger">
+                                    @error('name')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPhone">SĐT</label>
-                                <input type="tel" class="form-control" id="inputPhone" name="phone">
+                                <input type="tel" class="form-control" id="inputPhone" name="phone"
+                                    value="{{ old('phone') }}">
+                                <span class="text-danger">
+                                    @error('phone')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" name="email">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" class="form-control" id="inputEmail" name="email"
+                                    value="{{ old('email') }}">
+                                <span class="text-danger">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Mật khẩu</label>
-                                <input type="password" class="form-control" id="inputPassword4" name="password">
+                                <label for="inputPassword">Mật khẩu</label>
+                                <input type="password" class="form-control" id="inputPassword" name="password">
+                                <span class="text-danger">
+                                    @error('password')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                                @if ($errors->any())
+                                    <span class="text-danger">Vui lòng nhập mật khẩu.</span>
+                                @endif
                             </div>
                         </div>
 
-                        {{-- <h5 class="font-weight-bold mt-4">THÔNG TIN LỚP HỌC</h5>
+                        <h5 class="font-weight-bold mt-4">THÔNG TIN LỚP HỌC</h5>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="inputState">Quận/Huyện</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
+                                <label for="inputDistrict">Quận/Huyện</label>
+                                <select id="inputDistrict" class="form-control" name="district_id">
+                                    <option value="">-- Chọn Quận/Huyện --</option>
+                                    @foreach ($districts as $district)
+                                        <option value="{{ $district->district_id }}"
+                                            {{ old('district_id') == $district->district_id ? 'selected' : '' }}>
+                                            {{ $district->district_name }}
+                                        </option>
+                                    @endforeach
                                 </select>
+                                <span class="text-danger">
+                                    @error('district_id')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="form-group col-md-3">
-                                <label for="inputState">Phường/Xã</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
+                            <div class="form-group col-md-4">
+                                <label for="inputWard">Phường/Xã</label>
+                                <select id="inputWard" class="form-control" name="ward_id">
+                                    <option value="">-- Chọn Phường/Xã --</option>
                                 </select>
+                                <span class="text-danger">
+                                    @error('ward_id')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="inputZip">Số nhà, tên đường</label>
-                                <input type="text" class="form-control" id="inputZip" placeholder="Số 1, đường 3/2">
+                            <div class="form-group col-md-5">
+                                <label for="inputAddr">Số nhà, tên đường</label>
+                                <input type="text" class="form-control" id="inputAddr" placeholder="Số 1, đường 3/2"
+                                    name="addr_detail" value="{{ old('addr_detail') }}">
+                                <span class="text-danger">
+                                    @error('addr_detail')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <label for="">Môn học</label>
+                        <span class="text-danger">
+                            @error('subjects')
+                                {{ $message }}
+                            @enderror
+                        </span>
                         <div class="form-group pl-5">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Toán</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lý</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Hóa</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Sinh</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Sử</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Địa</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">GDCD</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Tin học</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Ngữ văn</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Tiếng Việt</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Tiếng Anh</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Rèn chữ</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Vẽ</label>
-                            </div>
+                            @foreach ($subjects as $subj)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" id="subj{{ $subj->subject_id }}"
+                                        value="{{ $subj->subject_id }}" name="subjects[]"
+                                        {{ is_array(old('subjects')) && in_array($subj->subject_id, old('subjects')) ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="subj{{ $subj->subject_id }}">
+                                        {{ $subj->subject_name }}
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
-                        <label for="">Khối lớp</label>
-                        <div class="form-group pl-5">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Mầm non</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Lớp 2</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 3</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Lớp 4</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 5</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Lớp 6</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 7</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 8</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Lớp 9</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 10</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Lớp 11</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Lớp 12</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Lớp 11</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Ôn thi vào 10</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Ôn thi trường chuyên</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Ôn thi đại học</label>
-                            </div>
+                        <div class="form-group">
+                            <label for="inputGrade">Khối lớp</label>
+                            <select id="inputGrade" class="form-control" name="grade">
+                                @foreach ($grades as $grade)
+                                    <option value="{{ $grade->grade_id }}"
+                                        {{ old('grade') == $grade->grade_id ? 'selected' : '' }}>
+                                        {{ $grade->grade_name }}</option>
+                                @endforeach
+                            </select>
+                            <span class="text-danger">
+                                @error('grade')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-5">
-                                <label for="inputState">Số buổi/tuần</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-7">
-                                <label for="inputState">Học phí/buổi</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Thời gian học</label>
-                            <input type="text" class="form-control" id="inputSchool"
-                                placeholder="T2-T4-T6; 18h-19h30">
-                        </div>
-
-                        <h5 class="font-weight-bold mt-4">THÔNG TIN HỌC VIÊN</h5>
-                        <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputState">Giới tính</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Nam</option>
-                                    <option>Nữ</option>
+                                <label for="inputSession">Số buổi/tuần</label>
+                                <select id="inputSession" class="form-control" name="num_of_sessions">
+                                    <option value="1" {{ old('num_of_sessions') == 1 ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ old('num_of_sessions') == 2 ? 'selected' : '' }}>2</option>
+                                    <option value="3" {{ old('num_of_sessions') == 3 ? 'selected' : '' }}>3</option>
+                                    <option value="4" {{ old('num_of_sessions') == 4 ? 'selected' : '' }}>4</option>
+                                    <option value="5" {{ old('num_of_sessions') == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="6" {{ old('num_of_sessions') == 6 ? 'selected' : '' }}>6</option>
+                                    <option value="7" {{ old('num_of_sessions') == 7 ? 'selected' : '' }}>7</option>
                                 </select>
+                                <span class="text-danger">
+                                    @error('num_of_sessions')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputState">Học lực</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Giỏi</option>
-                                    <option>Khá</option>
-                                    <option>Trung bình</option>
-                                    <option>Yếu kém</option>
+                                <label for="inputStudent">Số người học</label>
+                                <select id="inputStudent" class="form-control" name="num_of_students">
+                                    <option value="1" {{ old('num_of_students') == 1 ? 'selected' : '' }}>1</option>
+                                    <option value="2" {{ old('num_of_students') == 2 ? 'selected' : '' }}>2</option>
+                                    <option value="3" {{ old('num_of_students') == 3 ? 'selected' : '' }}>3</option>
+                                    <option value="4" {{ old('num_of_students') == 4 ? 'selected' : '' }}>4</option>
+                                    <option value="5" {{ old('num_of_students') == 5 ? 'selected' : '' }}>5</option>
                                 </select>
+                                <span class="text-danger">
+                                    @error('num_of_students')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputSchool">Trường</label>
-                            <input type="text" class="form-control" id="inputSchool" placeholder="">
+                            <label for="inputTime">Thời gian học</label>
+                            <input type="text" class="form-control" id="inputTime" placeholder="T2,T4,T6: 18h-19h30"
+                                name="time" value="{{ old('time') }}">
+                            <span class="text-danger">
+                                @error('time')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Ghi chú thêm</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            <label for="inputTuition">Học phí/buổi</label>
+                            <input type="text" class="form-control" id="inputTuition"
+                                placeholder="80.000đ-100.000đ (hoặc Thỏa thuận)" name="tuition"
+                                value="{{ old('tuition') }}">
+                            <span class="text-danger">
+                                @error('tuition')
+                                    {{ $message }}
+                                @enderror
+                            </span>
                         </div>
 
                         <h5 class="font-weight-bold mt-4">YÊU CẦU GIA SƯ</h5>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputState">Giới tính</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
+                                <label for="inputGenderTt">Giới tính</label>
+                                <select id="inputGenderTt" class="form-control" name="gender_tutor">
+                                    <option value="0" selected>Tùy trung tâm</option>
+                                    <option value="M" {{ old('tt_gender') == 'M' ? 'selected' : '' }}>Nam gia sư
+                                    </option>
+                                    <option value="F" {{ old('tt_gender') == 'F' ? 'selected' : '' }}>Nữ gia sư
+                                    </option>
                                 </select>
+                                <span class="text-danger">
+                                    @error('gender_tutor')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputState">Trình độ</label>
-                                <select id="inputState" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>...</option>
+                                <label for="inputLevel">Trình độ gia sư</label>
+                                <select id="inputLevel" class="form-control" name="level">
+                                    <option value="0" selected>Tùy trung tâm</option>
+                                    @foreach ($levels as $level)
+                                        <option value="{{ $level->level_id }}"
+                                            {{ old('level') == $level->level_id ? 'selected' : '' }}>
+                                            {{ $level->level_name }}
+                                        </option>
+                                    @endforeach
                                 </select>
+                                <span class="text-danger">
+                                    @error('level')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">Yêu cầu khác</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        </div> --}}
+                            <label for="inputRequest">Yêu cầu khác</label>
+                            <textarea class="form-control" id="inputRequest" rows="3" name="request">{{ old('request') }}</textarea>
+                        </div>
 
                         <div class="col-12">
                             <input type="submit" value="Đăng ký" class="btn btn-primary">
@@ -262,4 +237,34 @@
             </div>
         </div>
     </div> <!-- /.untree_co-section -->
+
+    <script>
+        $(document).ready(function() {
+            // Lưu giá trị ward_id cũ từ old()
+            var oldWardId = "{{ old('ward_id') }}";
+
+            $('#inputDistrict').change(function() {
+                var districtID = $(this).val();
+                if (districtID) {
+                    $.get('/wards/' + districtID, function(data) {
+                        $('#inputWard').empty().append('<option value="">Chọn Phường/Xã</option>');
+
+                        // Duyệt qua dữ liệu và thêm các lựa chọn
+                        $.each(data, function(i, ward) {
+                            $('#inputWard').append('<option value="' + ward.ward_id + '" ' +
+                                (oldWardId == ward.ward_id ? 'selected' : '') + '>' +
+                                ward.ward_name + '</option>');
+                        });
+                    });
+                } else {
+                    $('#inputWard').empty().append('<option value="">Chọn Phường/Xã</option>');
+                }
+            });
+
+            // Để hiển thị lựa chọn cũ nếu có giá trị ban đầu
+            if (oldWardId) {
+                $('#inputWard').val(oldWardId);
+            }
+        });
+    </script>
 @endsection

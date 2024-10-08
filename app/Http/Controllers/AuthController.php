@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Tutor;
+use App\Models\Parent1;
+use App\Models\Class1;
 use App\Models\Level;
 use App\Models\Tuition;
 use App\Models\Grade;
 use App\Models\Subject;
 use App\Models\District;
+use App\Models\Ward;
+use App\Models\Address;
 use App\Models\TutorDistrict;
 use App\Models\TutorGrade;
 use App\Models\TutorSubject;
+use App\Models\ClassSubject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,18 +25,91 @@ use Carbon\Carbon;
 class AuthController extends Controller
 {
     public function showFormParentRegister() {
-        return view('auth.register_parent');
+        $districts = District::all();
+        $wards = Ward::all();
+        $levels = Level::all();
+        $subjects = Subject::all();
+        $grades = Grade::all();
+
+        return view('auth.register_parent', compact('districts', 'wards', 'levels', 'subjects', 'grades'));
     }
 
     public function parentRegister(Request $req) {
 
-        User::create([
-            'name' => $req->name,
-            'email' => $req->email,
-            'phone' => $req->phone,
-            'password' => Hash::make($req->password),
+        $validatedData = $req->validate(
+            [
+                'name' => ['required', 'string', ],
+                'phone' => ['required', 
+                            'regex:/^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/', 
+                            'unique:App\Models\User,phone'],
+                'email' => ['required', 'email', 'unique:App\Models\User,email'],
+                'password' => ['required','string', 'min:8'],
+                'district_id' => ['required'],
+                'ward_id' => ['required',],
+                'addr_detail' => ['required',],
+                'subjects' => ['required'],
+                'grade' => ['required'],
+                'num_of_sessions' => ['required'],
+                'num_of_students' => ['required'],
+                'time' => ['required'],
+                'tuition' => ['required'],
+                'gender_tutor' => ['required'],
+                'level' => ['required'],
+                'request' => [],
+            ],
+            [
+                'required' => 'Không được để trống.',
+                'phone.regex' => 'SĐT không hợp lệ.',
+                'phone.unique' => 'SĐT đã được đăng ký.',
+                'email' => 'Email không đúng định dạng.',
+                'email.unique' => 'Email đã được đăng ký.',
+                'password.min' => 'Mật khẩu phải ít nhất :min ký tự.',
+            ],
+        );
+
+        $data = $req->all();
+        $data['password'] = Hash::make($req->password);
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'password' => $data['password'],
             'role' => 'parent',
         ]);
+
+        $parent = Parent1::create([
+            'pr_gender' => 0,
+            'user_id' => $user->id,
+        ]);
+
+        $address = Address::create([
+            'addr_detail' => $data['addr_detail'], 
+            'ward_id' => $data['ward_id'],
+        ]);
+
+        $class = Class1::create([
+            'class_num_of_students' => $data['num_of_students'], 
+            'class_num_of_sessions' => $data['num_of_sessions'], 
+            'class_time' => $data['time'], 
+            'class_gender_tutor' => $data['gender_tutor']=='0' ? null : $data['gender_tutor'], 
+            'class_request' =>  $data['request'] ?? null,
+            'class_tuition' => $data['tuition'],  
+            'class_status' => 0, 
+            'class_address' => $address->addr_id, 
+            'class_grade' => $data['grade'], 
+            'class_level' => $data['level']=='0' ? null : $data['level'], 
+            'class_tutor' => null, 
+            'class_parent' => $parent->pr_id,
+        ]);
+
+        $class_id = $class->class_id;
+        foreach($data['subjects'] as $subject) {
+            ClassSubject::create([
+                'class_id' => $class_id,
+                'subject_id' => $subject,
+            ]);
+        };
 
         return redirect()->route('login.form');
     }
@@ -168,5 +246,10 @@ class AuthController extends Controller
     public function logout() {
         Auth::logout();
         return redirect()->route('home');
+    }
+
+    public function getWards($district_id)
+    {
+        return Ward::where('district_id', $district_id)->get();
     }
 }
