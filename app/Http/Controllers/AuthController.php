@@ -231,6 +231,17 @@ class AuthController extends Controller
     }
 
     public function login(Request $req) {
+        $validatedData = $req->validate(
+            [
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ],
+            [
+                'required' => 'Không được để trống.',
+                'email' => 'Email không đúng định dạng.',             
+            ],
+        );
+
         if(Auth::attempt([
             'email' => $req->email,
             'password' => $req->password,
