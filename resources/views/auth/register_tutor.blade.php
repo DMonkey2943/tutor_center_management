@@ -124,8 +124,35 @@
                                 @enderror
                             </span>
                             @if ($errors->any())
-                                <span class="text-danger">Vui lòng chọn lại ảnh đại diện.</span>
+                                <span class="text-danger">Vui lòng chọn ảnh đại diện.</span>
                             @endif
+                            <!-- Thêm phần tử img để hiển thị preview -->
+                            <div class="form-group mt-1 mb-3 ml-5">
+                                <img id="avt_preview" src="#" alt="Ảnh đại diện" style="display: none;"
+                                    height="120px" width="120px" />
+                            </div>
+                            <script>
+                                document.querySelector('#img_avatar').addEventListener('change', function(e) {
+                                    console.log('Changed');
+                                    var fileName = e.target.files[0].name;
+                                    var label = e.target.nextElementSibling;
+                                    label.innerText = fileName;
+
+                                    var file = e.target.files[0];
+                                    var reader = new FileReader();
+
+                                    // Đọc nội dung file ảnh
+                                    reader.onload = function(e) {
+                                        var imgPreview = document.getElementById('avt_preview');
+                                        imgPreview.src = e.target.result; // Đặt URL của ảnh đã đọc vào src của thẻ img
+                                        imgPreview.style.display = 'block'; // Hiển thị ảnh preview
+                                    };
+
+                                    if (file) {
+                                        reader.readAsDataURL(file); // Chuyển file sang dạng URL base64 để hiển thị
+                                    }
+                                });
+                            </script>
                         </div>
 
                         <div class="form-row">
@@ -175,6 +202,33 @@
                             @if ($errors->any())
                                 <span class="text-danger">Vui lòng chọn lại ảnh bằng cấp / thẻ sinh viên.</span>
                             @endif
+                            <!-- Thêm phần tử img để hiển thị preview -->
+                            <div class="form-group mt-1 mb-3 ml-5">
+                                <img id="degree_preview" src="#" alt="Ảnh đại diện"
+                                    style="max-width: 120px; display: none;" />
+                            </div>
+                            <script>
+                                document.querySelector('#img_degree').addEventListener('change', function(e) {
+                                    console.log('Changed');
+                                    var fileName = e.target.files[0].name;
+                                    var label = e.target.nextElementSibling;
+                                    label.innerText = fileName;
+
+                                    var file = e.target.files[0];
+                                    var reader = new FileReader();
+
+                                    // Đọc nội dung file ảnh
+                                    reader.onload = function(e) {
+                                        var imgPreview = document.getElementById('degree_preview');
+                                        imgPreview.src = e.target.result; // Đặt URL của ảnh đã đọc vào src của thẻ img
+                                        imgPreview.style.display = 'block'; // Hiển thị ảnh preview
+                                    };
+
+                                    if (file) {
+                                        reader.readAsDataURL(file); // Chuyển file sang dạng URL base64 để hiển thị
+                                    }
+                                });
+                            </script>
                         </div>
                         <label for="">Môn dạy</label>
                         <span class="text-danger">
