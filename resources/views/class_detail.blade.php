@@ -10,65 +10,89 @@
             <div class="row mb-5 justify-content-center">
                 <div class="col-lg-8 mx-auto order-1" data-aos="fade-up" data-aos-delay="200">
                     <div class="form-box">
-                        <h3 class="line-bottom font-weight-bold">MÃ LỚP: 123</h3>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="line-bottom font-weight-bold">MÃ SỐ LỚP: {{ $class->class_id }}</h3>
+                            @if ($class->class_status == 0)
+                                <p class="p-2 m-0 bg-primary text-white rounded">Chưa giao</p>
+                            @elseif($class->class_status == 1)
+                                <p class="p-2 m-0 bg-success text-white rounded">Đã giao</p>
+                            @endif
+                        </div>
                         <p>
                             <span class="font-weight-bold">Môn dạy: </span>
-                            Toán, Văn, Anh
+                            <span class="text-primary">
+                                @foreach ($class->subjects as $subject)
+                                    {{ $subject->subject_name }}
+                                    @if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </span>
                         </p>
                         <p>
                             <span class="font-weight-bold">Lớp dạy: </span>
-                            12
+                            <span class="text-primary">{{ $class->grade->grade_name }}</span>
                         </p>
                         <p>
                             <span class="font-weight-bold">Địa chỉ: </span>
-                            P.Hưng Lợi, Q.Ninh Kiều
+                            {{ $class->address->ward->ward_name }},
+                            {{ $class->address->ward->district->district_name }}
+                        </p>
+                        <p>
+                            <span class="font-weight-bold">Số học viên: </span>
+                            {{ $class->class_num_of_students }}
                         </p>
                         <p>
                             <span class="font-weight-bold">Số buổi/tuần: </span>
-                            3
+                            {{ $class->class_num_of_sessions }}
                         </p>
                         <p>
                             <span class="font-weight-bold">Mức lương/buổi: </span>
-                            100.000đ
+                            {{ $class->class_tuition }}
                         </p>
                         <p>
                             <span class="font-weight-bold">Thời gian: </span>
-                            T2-T4-T6, 18h-19h30
+                            {{ $class->class_time }}
                         </p>
                         <h5 class="font-weight-bold mt-4">YÊU CẦU GIA SƯ</h5>
                         <p>
                             <span class="font-weight-bold">Trình độ:</span>
-                            Giáo viên
+                            @if ($class->class_level != null)
+                                {{ $class->level->level_name }}
+                            @endif
                         </p>
                         <p>
                             <span class="font-weight-bold">Giới tính: </span>
-                            Nữ
+                            @if ($class->class_gender_tutor != null)
+                                @if ($class->class_gender_tutor == 'M')
+                                    Nam
+                                @elseif ($class->class_gender_tutor == 'F')
+                                    Nữ
+                                @endif
+                            @else
+                                Nam/Nữ
+                            @endif
                         </p>
+                        @if ($class->class_request != null)
+                            <p>
+                                <span class="font-weight-bold">Yêu cầu khác: </span>
+                                {{ $class->class_request }}
+                            </p>
+                        @endif
                         <p>
-                            <span class="font-weight-bold">Yêu cầu khác: </span>
-                            Học sư phạm, có kinh nghiệm
+                            <span class="">Ngày cập nhật: </span>
+                            {{ \Carbon\Carbon::parse($class->updated_at)->format('d/m/Y') }}
                         </p>
-                        <h5 class="font-weight-bold mt-4">THÔNG TIN HỌC VIÊN</h5>
-                        <p>
-                            <span class="font-weight-bold">Giới tính: </span>
-                            Nữ
-                        </p>
-                        <p>
-                            <span class="font-weight-bold">Học lực: </span>
-                            Trung bình
-                        </p>
-                        <p>
-                            <span class="font-weight-bold">Trường: </span>
-                            THPT Nguyễn Việt Dũng
-                        </p>
-                        <p>
-                            <span class="font-weight-bold">Ghi chú thêm: </span>
-                            Dạy ôn chương trình lớp 11 trong tầm 4 buổi để cháu nhớ lại kiến thức cơ bản và sau đó sẽ đi vào
-                            chương trình lớp 12.
-                        </p>
-                        <div class="text-right">
-                            <input type="submit" value="Đăng ký nhận lớp" class="btn btn-primary">
-                        </div>
+
+                        @if (Auth::check() && Auth::user()->role == 'tutor' && $class->class_satus == 0)
+                            <div class="text-right">
+                                <form action="" method="POST">
+                                    <input type="hidden" name="tutor_id" value="{{ Auth::user()->tutor->tt_id }}">
+                                    <input type="hidden" name="class_id" value="{{ $class->class_id }}">
+                                    <input type="submit" value="Đăng ký nhận lớp" class="btn btn-primary">
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

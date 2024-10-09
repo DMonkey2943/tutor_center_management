@@ -18,7 +18,9 @@ class HomeController extends Controller
     }
 
     function class_detail($class_id) {
-        return view('class_detail', compact('class_id'));
+        $class = Class1::find($class_id) ;
+
+        return view('class_detail', compact('class'));
     }
 
     function tutors() {
