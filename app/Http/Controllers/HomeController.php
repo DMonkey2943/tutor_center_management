@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Tutor;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,7 +19,9 @@ class HomeController extends Controller
     }
 
     function tutors() {
-        return view('tutors');
+        $tutors = Tutor::orderBy('updated_at', 'desc')->get();
+
+        return view('tutors', compact('tutors',));
     }    
 
 }
