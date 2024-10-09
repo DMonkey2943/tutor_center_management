@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Tutor;
+use App\Models\Class1;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,11 +12,13 @@ class HomeController extends Controller
     }
 
     function classes() {
-        return view('classes');
+        $classes = Class1::orderBy('updated_at', 'desc')->get();
+
+        return view('classes', compact('classes',));
     }
 
-    function class_detail() {
-        return view('class_detail');
+    function class_detail($class_id) {
+        return view('class_detail', compact('class_id'));
     }
 
     function tutors() {

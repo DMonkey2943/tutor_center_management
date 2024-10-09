@@ -63,131 +63,72 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature">
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="col-6 font-weight-bold p-0">MS: 000001</h3>
-                                <p class="p-2 m-0 bg-primary text-white rounded">Chưa giao</p>
+                @foreach ($classes as $class)
+                    <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3 class="col-6 font-weight-bold p-0">MS: {{ $class->class_id }}</h3>
+                                    @if ($class->class_status == 0)
+                                        <p class="p-2 m-0 bg-primary text-white rounded">Chưa giao</p>
+                                    @elseif($class->class_status == 1)
+                                        <p class="p-2 m-0 bg-success text-white rounded">Đã giao</p>
+                                    @endif
+                                </div>
+                                <p>
+                                    <span class="font-weight-bold">Môn dạy: </span>
+                                    <span class="text-primary">
+                                        @foreach ($class->subjects as $subject)
+                                            {{ $subject->subject_name }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Khối lớp: </span>
+                                    <span class="text-primary">{{ $class->grade->grade_name }}</span>
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Số học viên: </span>
+                                    {{ $class->class_num_of_students }}
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Địa chỉ: </span>
+                                    {{ $class->address->ward->ward_name }},
+                                    {{ $class->address->ward->district->district_name }}
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Số buổi/tuần: </span>
+                                    {{ $class->class_num_of_sessions }}
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Yêu cầu GS:</span>
+                                    @if ($class->class_level != null)
+                                        {{ $class->level->level_name }} +
+                                    @endif
+
+                                    @if ($class->class_gender_tutor != null)
+                                        @if ($class->class_gender_tutor == 'M')
+                                            Nam
+                                        @elseif ($class->class_gender_tutor == 'F')
+                                            Nữ
+                                        @endif
+                                    @else
+                                        Nam/Nữ
+                                    @endif
+                                </p>
                             </div>
-                            <p>
-                                <span class="font-weight-bold">Môn dạy: </span>
-                                <span class="text-primary">Toán, Văn, Anh </span>
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Khối lớp: </span>
-                                <span class="text-primary">Lớp 12 </span>
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Địa chỉ: </span>
-                                P.Hưng Lợi, Q.Ninh Kiều
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Số buổi/tuần: </span>
-                                3
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Mức lương/buổi: </span>
-                                100.000đ - 150.000đ
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Thời gian: </span>
-                                T2: 17h-18h30,
-                                T3: 18h30-20h,
-                                T4: 9h-10h30,
-                                T5: 18h30-20h,
-                                T6: 17h-18h30,
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Yêu cầu:</span>
-                                Giáo viên, Nữ
-                            </p>
-                        </div>
 
-                        <div class="text-right">
-                            <p class="mb-0"><a href="{{ route('class_detail') }}">Xem chi tiết <i
-                                        class="bi bi-chevron-double-right"></i></a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="feature">
-                        <!-- <span class="uil uil-music"></span> -->
-                        <div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h3 class="col-6 font-weight-bold p-0">MS: 000002</h3>
-                                <p class="p-2 m-0 bg-success text-white rounded">Đã giao</p>
+                            <div class="text-right">
+                                <p class="mb-0"><a
+                                        href="{{ route('class_detail', ['class_id' => $class->class_id]) }}">Xem chi tiết <i
+                                            class="bi bi-chevron-double-right"></i></a></p>
                             </div>
-                            <p>
-                                <span class="font-weight-bold">Môn dạy: </span>
-                                <span class="text-primary">Rèn chữ </span>
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Khối lớp: </span>
-                                <span class="text-primary">Lớp 1 </span>
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Địa chỉ: </span>
-                                P.Lê Bình, Q.Cái Răng
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Số buổi/tuần: </span>
-                                5
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Mức lương/buổi: </span>
-                                100.000đ - 150.000đ
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Thời gian: </span>
-                                T2-T3-T4-T5-T6: 8h-9h30
-                            </p>
-                            <p>
-                                <span class="font-weight-bold">Yêu cầu:</span>
-                                Giáo viên, Nữ
-                            </p>
-                        </div>
-
-                        <div class="text-right">
-                            <p class="mb-0"><a href="{{ route('class_detail') }}">Xem chi tiết <i
-                                        class="bi bi-chevron-double-right"></i></a></p>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature">
-                        <span class="uil uil-book-open"></span>
-                        <h3>English Class</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                            live the blind texts.</p>
-                    </div>
-                </div>
-
-
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay=100">
-                    <div class="feature">
-                        <span class="uil uil-book-alt"></span>
-                        <h3>Reading for Kids</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                            live the blind texts.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="feature">
-                        <span class="uil uil-history"></span>
-                        <h3>History Class</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                            live the blind texts.</p>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="feature">
-                        <span class="uil uil-headphones"></span>
-                        <h3>Music</h3>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                            live the blind texts.</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div> <!-- /.container -->
 
