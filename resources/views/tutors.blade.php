@@ -7,16 +7,18 @@
             huynh
             học sinh những gia sư tốt đã được chọn lọc kỹ càng và phù hợp với yêu cầu riêng biệt của từng học viên.</p>
     </div>
-    <div class="mb-1 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
-        <p>Phụ huynh có nhu cầu đăng ký lớp học để tìm gia sư vui lòng đăng ký tài khoản.</p>
-    </div>
+    @guest
+        <div class="mb-1 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
+            <p>Phụ huynh có nhu cầu đăng ký lớp học để tìm gia sư vui lòng đăng ký tài khoản.</p>
+        </div>
 
-    <p class="mb-0" data-aos="fade-up" data-aos-delay="300">
-        <a href="register_parent.html" class="btn btn-secondary">
-            <i class="bi bi-briefcase-fill"></i>
-            Đăng ký tìm gia sư
-        </a>
-    </p>
+        <p class="mb-0" data-aos="fade-up" data-aos-delay="300">
+            <a href="{{ route('parentRegister') }}" class="btn btn-secondary">
+                <i class="bi bi-briefcase-fill"></i>
+                Đăng ký tìm gia sư
+            </a>
+        </p>
+    @endguest
 @endsection
 @section('content')
     {{-- Banner --}}

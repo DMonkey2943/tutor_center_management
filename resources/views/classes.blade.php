@@ -5,15 +5,17 @@
     <div class="mb-4 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
         <p>Trung tâm gia sư Cần Thơ thường xuyên cập nhật lớp dạy kèm mới hàng giờ.</p>
     </div>
-    <div class="mb-1 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
-        <p>Gia sư có nhu cầu nhận lớp vui lòng đăng ký tài khoản.</p>
-    </div>
-    <p class="mb-0" data-aos="fade-up" data-aos-delay="300">
-        <a href="register_tutor.html" class="btn btn-secondary">
-            <i class="bi bi-briefcase-fill"></i>
-            Đăng ký làm gia sư
-        </a>
-    </p>
+    @guest
+        <div class="mb-1 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
+            <p>Gia sư có nhu cầu nhận lớp vui lòng đăng ký tài khoản.</p>
+        </div>
+        <p class="mb-0" data-aos="fade-up" data-aos-delay="300">
+            <a href="{{ route('tutorRegister') }}" class="btn btn-secondary">
+                <i class="bi bi-briefcase-fill"></i>
+                Đăng ký làm gia sư
+            </a>
+        </p>
+    @endguest
 @endsection
 @section('content')
     {{-- Banner --}}
