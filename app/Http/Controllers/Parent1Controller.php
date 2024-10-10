@@ -92,8 +92,11 @@ class Parent1Controller extends Controller
         return redirect()->route('home');
     }
 
-    function registeredClasses() {
-        
+    function showRegisteredClasses() {
+        $pr_id = Auth::user()->parent->pr_id;
+        $classes = Class1::where('class_parent', $pr_id)->get();
+
+        return view('parent.classes', compact('classes'));
     }
 
     function class_detail($class_id) {
