@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Parent1Controller;
+use App\Http\Controllers\TutorController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -39,3 +41,29 @@ Route::middleware(['guest'])->group(function () {
 });
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/wards/{district_id}', [AuthController::class, 'getWards']);
+
+// Parent
+Route::prefix('parent')->middleware(['auth', 'role:parent'])->group(function() {
+    Route::get('/', [Parent1Controller::class, 'index'])->name('parent.account');
+    Route::get('/register/class', [Parent1Controller::class, 'showFormRegisterClass'])->name('parent.registerClass.form');
+    Route::post('/register/class', [Parent1Controller::class, 'registerClass'])->name('parent.registerClass');
+    Route::get('/classes', [Parent1Controller::class, 'showRegisteredClasses'])->name('parent.classes');
+    Route::get('/class/{class_id}', [Parent1Controller::class, 'showClass_detail'])->name('parent.class_details');
+});
+
+// Tutor
+Route::prefix('tutor')->middleware(['auth', 'role:tutor'])->group(function() {
+    Route::get('/', [TutorController::class, 'index'])->name('tutor.account');
+    Route::get('/classes', [TutorController::class, 'registeredClasses'])->name('tutor.classes');
+    Route::get('/class/{class_id}', [TutorController::class, 'class_detail'])->name('tutor.class_details');
+});
+
+
+
+// Admin
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
+    
+});
+
+
+

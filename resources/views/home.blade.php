@@ -9,7 +9,7 @@
     @if (Auth::check())
         @if (Auth::user()->role == 'parent')
             <p class="mb-4" data-aos="fade-up" data-aos-delay="300"></p>
-            <a href="register_class.html" class="mb-3 ml-2 mr-2 btn btn-secondary">
+            <a href="{{ route('parent.registerClass.form') }}" class="mb-3 ml-2 mr-2 btn btn-secondary">
                 <i class="bi bi-plus-circle-fill"></i>
                 Đăng ký lớp học
             </a>
