@@ -99,7 +99,22 @@ class Parent1Controller extends Controller
         return view('parent.classes', compact('classes'));
     }
 
-    function class_detail($class_id) {
+    function showClassDetail($class_id) {
+        $class = Class1::find($class_id) ;
+
+        // Neu parent khong phai la nguoi dang ky class nay thi se chuyen ve trang chu
+        if(Auth::user()->parent->pr_id != $class->class_parent){
+            return redirect()->route('home');
+        }
+
+        return view('parent.class_detail', compact('class'));
+    }
+
+    function editClassDetail($class_id) {
+        
+    }
+
+    function updateClassDetail($class_id) {
         
     }
 

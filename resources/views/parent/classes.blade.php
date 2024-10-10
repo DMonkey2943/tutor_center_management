@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Đăng ký lớp học')
-@section('banner-title', 'Đăng ký lớp học')
+@section('title', 'Lớp đã đăng ký')
+@section('banner-title', 'Lớp đã đăng ký')
 @section('content')
     {{-- Banner --}}
     @include('layouts.banner_sm')
