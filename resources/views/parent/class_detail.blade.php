@@ -10,6 +10,12 @@
             <div class="row mb-5 justify-content-center">
                 <div class="col-lg-8 mx-auto order-1" data-aos="fade-up" data-aos-delay="200">
                     <div class="form-box">
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h3 class="line-bottom font-weight-bold">MÃ SỐ LỚP: {{ $class->class_id }}</h3>
                             @if ($class->class_status == 0)

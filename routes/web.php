@@ -49,8 +49,8 @@ Route::prefix('parent')->middleware(['auth', 'role:parent'])->group(function() {
     Route::post('/register/class', [Parent1Controller::class, 'registerClass'])->name('parent.registerClass');
     Route::get('/classes', [Parent1Controller::class, 'showRegisteredClasses'])->name('parent.classes');
     Route::get('/class/{class_id}', [Parent1Controller::class, 'showClassDetail'])->name('parent.class_details');
-    Route::get('/class/{class_id}/edit', [Parent1Controller::class, 'editClassDetail'])->name('parent.class_details.edit');
-    Route::post('/class/{class_id}/edit', [Parent1Controller::class, 'updateClassDetail'])->name('parent.class_details.update');
+    Route::get('/class/edit/{class_id}', [Parent1Controller::class, 'editClassDetail'])->name('parent.class_details.edit');
+    Route::PATCH('/class/update/{class_id}', [Parent1Controller::class, 'updateClassDetail'])->name('parent.class_details.update');
 });
 
 // Tutor

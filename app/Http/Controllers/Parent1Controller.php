@@ -100,7 +100,7 @@ class Parent1Controller extends Controller
     }
 
     function showClassDetail($class_id) {
-        $class = Class1::find($class_id) ;
+        $class = Class1::find($class_id);
 
         // Neu parent khong phai la nguoi dang ky class nay thi se chuyen ve trang chu
         if(Auth::user()->parent->pr_id != $class->class_parent){
@@ -111,11 +111,65 @@ class Parent1Controller extends Controller
     }
 
     function editClassDetail($class_id) {
-        
+        $class = Class1::findOrFail($class_id);
+        $class_subjects = $class->subjects->pluck('subject_id')->toArray();
+        $districts = District::all();
+        $levels = Level::all();
+        $subjects = Subject::all();
+        $grades = Grade::all();
+        $wards = Ward::where('district_id', $class->address->ward->district_id)->get();
+
+        // Neu parent khong phai la nguoi dang ky class nay thi se chuyen ve trang chu
+        if(Auth::user()->parent->pr_id != $class->class_parent){
+            return redirect()->route('home');
+        }
+
+        return view('parent.class_update', compact('class', 'class_subjects', 'districts', 'wards', 'levels', 'subjects', 'grades'));
     }
 
-    function updateClassDetail($class_id) {
+    function updateClassDetail(Request $req, $class_id) {
+        $validatedData = $req->validate(
+            [
+                'district_id' => ['required'],
+                'ward_id' => ['required',],
+                'addr_detail' => ['required',],
+                'subjects' => ['required'],
+                'grade' => ['required'],
+                'num_of_sessions' => ['required'],
+                'num_of_students' => ['required'],
+                'time' => ['required'],
+                'tuition' => ['required'],
+                'gender_tutor' => ['required'],
+                'level' => ['required'],
+                'request' => [],
+            ],
+            [
+                'required' => 'Không được để trống.',
+            ],
+        );
+
+        $data = $req->all();
+
+        $class = Class1::findOrFail($class_id);
+
+        $address = Address::findOrFail($class->class_address);
+        $address->addr_detail = $data['addr_detail'];
+        $address->ward_id = $data['ward_id'];
+        $address->save();
+
+        $class->class_num_of_students = $data['num_of_students'];
+        $class->class_num_of_sessions = $data['num_of_sessions'];
+        $class->class_time = $data['time'];
+        $class->class_gender_tutor = $data['gender_tutor'] == '0' ? null : $data['gender_tutor'];
+        $class->class_request = $data['request'] ?? null;
+        $class->class_tuition = $data['tuition'];
+        $class->class_grade = $data['grade'];
+        $class->class_level = $data['level'] == '0' ? null : $data['level'];
+        $class->save();
+
+        $class->subjects()->sync($data['subjects']);
         
+        return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('success', 'Cập nhật lớp học thành công!');
     }
 
 }
