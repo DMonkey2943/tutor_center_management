@@ -95,11 +95,16 @@
                             <i class="bi bi-pencil-square"></i>
                             Chỉnh sửa
                         </a>
-                        <a href="{{ route('parent.class_details.edit', ['class_id' => $class->class_id]) }}"
-                            class="mb-3 ml-2 mr-2 btn btn-danger">
-                            <i class="bi bi-trash3-fill"></i>
-                            Xóa
-                        </a>
+                        <form method="POST" action="{{ route('parent.class_details.delete', $class) }}"
+                            onclick="return confirm( 'Bạn có chắc muốn xóa lớp học mã số {{ $class->class_id }} hay không?' )"
+                            style="display: inline">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="mb-3 ml-2 mr-2 btn btn-danger">
+                                <i class="bi bi-trash3-fill"></i>
+                                Xóa
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -94,7 +94,7 @@ class Parent1Controller extends Controller
 
     function showRegisteredClasses() {
         $pr_id = Auth::user()->parent->pr_id;
-        $classes = Class1::where('class_parent', $pr_id)->get();
+        $classes = Parent1::findOrFail($pr_id)->classes; // = Class1::where('class_parent', $pr_id)->get();
 
         return view('parent.classes', compact('classes'));
     }
@@ -172,4 +172,12 @@ class Parent1Controller extends Controller
         return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('success', 'Cập nhật lớp học thành công!');
     }
 
+    function destroyClassDetail($class_id) {
+        $class = Class1::findOrFail($class_id);
+        
+        $class->subjects()->sync([]);
+        $class->delete();
+
+        return redirect()->route('parent.classes')->with('success', 'Xóa lớp học thành công!');
+    }
 }

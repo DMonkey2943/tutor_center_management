@@ -7,6 +7,11 @@
 
     <div class="untree_co-section">
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row">
                 @foreach ($classes as $class)
                     <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
