@@ -6,6 +6,16 @@
     @include('layouts.banner_sm')
     <div class="untree_co-section">
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             @if ($classes->isEmpty())
                 <p>Bạn chưa đăng ký nhận dạy lớp học nào.</p>
             @else
@@ -59,11 +69,14 @@
                                     @foreach ($class->tutorList as $tutor)
                                         @if ($tutor->pivot->status == 0)
                                             <div class="mb-2">
-                                                <form action="" method="POST">
+                                                <form action="{{ route('tutor.unregisterClass', $class->class_id) }}"
+                                                    method="POST">
                                                     @csrf
+                                                    @method('DELETE')
                                                     <input type="submit" value="Hủy đăng ký"
                                                         class="btn btn-danger p-1 rounded"
-                                                        style="text-transform: none; font-size:15px; letter-spacing: normal;">
+                                                        style="text-transform: none; font-size:15px; letter-spacing: normal;"
+                                                        onclick="return confirm('Bạn có chắc chắn muốn hủy đăng ký lớp học mã số {{ $class->class_id }} hay không?')">
                                                 </form>
                                             </div>
                                         @elseif ($tutor->pivot->status == 1)

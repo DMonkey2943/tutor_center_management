@@ -43,4 +43,20 @@ class TutorController extends Controller
 
         return view('tutor.classes', compact('classes'));
     }
+
+    function unregisterClass($class_id) {
+        $tt_id = Auth::user()->tutor->tt_id;
+
+        $deleted = Approve::where('class_id', $class_id)
+                        ->where('tt_id', $tt_id)
+                        ->delete();
+
+        return redirect()->route('tutor.classes')->with('success', 'Hủy đăng ký lớp học mã số '. $class_id .'  thành công!');
+
+        if ($deleted) {
+            return redirect()->route('tutor.classes')->with('success', 'Hủy đăng ký lớp học mã số '. $class_id .'  thành công!');
+        } else {
+            return redirect()->route('tutor.classes')->with('error', 'Hủy đăng ký lớp học mã số '. $class_id .'  thất bại!');
+        }
+    }
 }
