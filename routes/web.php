@@ -57,8 +57,8 @@ Route::prefix('parent')->middleware(['auth', 'role:parent'])->group(function() {
 // Tutor
 Route::prefix('tutor')->middleware(['auth', 'role:tutor'])->group(function() {
     Route::get('/', [TutorController::class, 'index'])->name('tutor.account');
-    Route::get('/classes', [TutorController::class, 'registeredClasses'])->name('tutor.classes');
-    Route::get('/class/{class_id}', [TutorController::class, 'class_detail'])->name('tutor.class_details');
+    Route::post('/register/class', [TutorController::class, 'registerClass'])->name('tutor.registerClass'); //Dang ky nhan lop
+    Route::get('/classes', [TutorController::class, 'showRegisteredClasses'])->name('tutor.classes'); //DS lop da dang ky nhan
 });
 
 

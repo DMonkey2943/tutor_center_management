@@ -86,8 +86,8 @@
 
                         @if (Auth::check() && Auth::user()->role == 'tutor' && $class->class_satus == 0)
                             <div class="text-right">
-                                <form action="" method="POST">
-                                    <input type="hidden" name="tutor_id" value="{{ Auth::user()->tutor->tt_id }}">
+                                <form action="{{ route('tutor.registerClass') }}" method="POST">
+                                    @csrf
                                     <input type="hidden" name="class_id" value="{{ $class->class_id }}">
                                     <input type="submit" value="Đăng ký nhận lớp" class="btn btn-primary">
                                 </form>

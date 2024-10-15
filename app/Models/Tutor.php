@@ -57,6 +57,6 @@ class Tutor extends Model
 
     public function classList() {
         return $this->belongsToMany(Class1::class, 'approve', 'class_id', 'tt_id')
-            ->using(Approve::class)->withPivot('status', 'created_at', 'updated_at');
+            ->withPivot('status', 'created_at', 'updated_at');
     }
 }
