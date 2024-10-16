@@ -52,6 +52,7 @@ Route::prefix('parent')->middleware(['auth', 'role:parent'])->group(function() {
     Route::get('/class/edit/{class_id}', [Parent1Controller::class, 'editClassDetail'])->name('parent.class_details.edit');
     Route::PATCH('/class/update/{class_id}', [Parent1Controller::class, 'updateClassDetail'])->name('parent.class_details.update');
     Route::DELETE('/class/delete/{class_id}', [Parent1Controller::class, 'destroyClassDetail'])->name('parent.class_details.delete');
+    Route::PATCH('/class/aprrove/{class_id}/{tutor_id}', [Parent1Controller::class, 'approveTutor'])->name('parent.approveTutor');
 });
 
 // Tutor

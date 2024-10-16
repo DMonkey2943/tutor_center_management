@@ -16,6 +16,7 @@ use App\Models\TutorDistrict;
 use App\Models\TutorGrade;
 use App\Models\TutorSubject;
 use App\Models\ClassSubject;
+use App\Models\Approve;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -179,5 +180,19 @@ class Parent1Controller extends Controller
         $class->delete();
 
         return redirect()->route('parent.classes')->with('success', 'Xóa lớp học thành công!');
+    }
+
+    function approveTutor($class_id, $tutor_id) {
+        $approve = Approve::where('class_id', $class_id)
+                      ->where('tt_id', $tutor_id)
+                      ->first();
+        if($approve) {
+            $approve->status = 1;
+            $approve->save();
+
+            return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('success', 'Duyệt gia sư mã số'. $tutor_id .' thành công!');
+        } else {
+            return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('error', 'Duyệt gia sư mã số '. $tutor_id .' thất bại.');
+        }
     }
 }

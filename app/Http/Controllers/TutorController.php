@@ -84,9 +84,7 @@ class TutorController extends Controller
         
         $class->class_tutor = $tt_id;
         $class->class_status = 1; // Cập nhật trạng thái lớp thành đã giao
-        $class->save();     
-
-        dd($class);
+        $class->save();
 
         return redirect()->route('tutor.teachedClasses')->with('success', 'Nhận dạy lớp học mã số '. $class_id .'  thành công!');
     }

@@ -14,6 +14,10 @@
                             <div class="alert alert-success">
                                 {{ session('success') }}
                             </div>
+                        @elseif(session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
                         @endif
 
                         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -110,9 +114,187 @@
             </div>
 
             {{-- DS gia sư đăng ký nhận lớp --> Xét duyệt gia sư --}}
-            <div class="row mb-5 justify-content-center">
-                <h3 class="font-weight-bold text-primary">DANH SÁCH GIA SƯ ĐĂNG KÝ NHẬN LỚP</h3>
-            </div>
-        </div> <!-- /.container -->
+            @if ($class->class_status == 0)
+                <div>
+                    <div class="row mb-3 justify-content-center">
+                        <h3 class="font-weight-bold text-primary">DANH SÁCH GIA SƯ ĐĂNG KÝ NHẬN LỚP</h3>
+                    </div>
+                    <div>
+                        @if ($class->tutorList->isEmpty())
+                            <p class="alert alert-info">Không có gia sư nào đăng ký nhận lớp này.</p>
+                        @else
+                            @foreach ($class->tutorList as $index => $tt)
+                                <div class="card card-body mb-3">
+                                    <h5 class="font-weight-bold">{{ $tt->user->name }} - Mã gia sư: {{ $tt->tt_id }}
+                                    </h5>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <img src="{{ asset('storage/' . $tt->tt_avatar) }}" alt=""
+                                                style="object-fit: cover;" class="rounded" height="140px" width="140px">
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div>
+                                                <span class="font-weight-bold">Ngày sinh:</span>
+                                                <span>{{ \Carbon\Carbon::parse($tt->tt_birthday)->format('d/m/Y') }}</span>
+                                            </div>
+                                            <div>
+                                                <span class="font-weight-bold">Trình độ:</span>
+                                                <span>{{ $tt->level->level_name }}</span>
+                                            </div>
+                                            <div>
+                                                <span class="font-weight-bold">Chuyên ngành:</span>
+                                                <span>{{ $tt->tt_major }}</span>
+                                            </div>
+                                            <div>
+                                                <span class="font-weight-bold">Nơi học tập/công tác:</span>
+                                                <span>{{ $tt->tt_school }}</span>
+                                            </div>
+                                            <div>
+                                                <span class="font-weight-bold">Các môn:</span>
+                                                <span>
+                                                    @foreach ($tt->subjects as $subject)
+                                                        {{ $subject->subject_name }}@if (!$loop->last)
+                                                            ,
+                                                        @endif
+                                                    @endforeach
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="font-weight-bold">Nhận dạy:</span>
+                                                <span>
+                                                    @foreach ($tt->grades as $grade)
+                                                        {{ $grade->grade_name }}@if (!$loop->last)
+                                                            ,
+                                                        @endif
+                                                    @endforeach
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div>
+                                                <span class="font-weight-bold">Khu vực:</span>
+                                                <span>
+                                                    @foreach ($tt->districts as $district)
+                                                        {{ $district->district_name }}@if (!$loop->last)
+                                                            ,
+                                                        @endif
+                                                    @endforeach
+                                                </span>
+                                            </div>
+                                            <div class="text-justify">
+                                                <span class="font-weight-bold">Kinh nghiệm:</span>
+                                                <span>{{ $tt->tt_experiences }}</span>
+                                            </div>
+                                            <div>
+                                                <span class="font-weight-bold">Học phí/buổi:</span>
+                                                <span>{{ $tt->tuition->tuition_range }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-1">
+                                        @if ($tt->pivot->status == 0)
+                                            <form
+                                                action="{{ route('parent.approveTutor', [$class->class_id, $tt->tt_id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input type="submit" value="Duyệt gia sư"
+                                                    class="btn btn-success p-2 pl-3 pr-3 rounded"
+                                                    style="text-transform: none; font-size:16px; letter-spacing: normal;">
+                                            </form>
+                                        @elseif($tt->pivot->status == 1)
+                                            <div class="alert alert-warning">
+                                                Đang đợi gia sư xác nhận!
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+            @else
+                <div>
+                    <div class="row mb-3 justify-content-center">
+                        <h3 class="font-weight-bold text-primary">GIA SƯ NHẬN LỚP</h3>
+                    </div>
+                    <div class="card card-body mb-3">
+                        @php
+                            $tutor = $class->tutor;
+                        @endphp
+                        <h5 class="font-weight-bold">{{ $tutor->user->name }} - Mã gia sư: {{ $tutor->tt_id }}</h5>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <img src="{{ asset('storage/' . $tutor->tt_avatar) }}" alt=""
+                                    style="object-fit: cover;" class="rounded" height="140px" width="140px">
+                            </div>
+                            <div class="col-lg-5">
+                                <div>
+                                    <span class="font-weight-bold">Ngày sinh:</span>
+                                    <span>{{ \Carbon\Carbon::parse($tutor->tt_birthday)->format('d/m/Y') }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Trình độ:</span>
+                                    <span>{{ $tutor->level->level_name }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Chuyên ngành:</span>
+                                    <span>{{ $tutor->tt_major }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Nơi học tập/công tác:</span>
+                                    <span>{{ $tutor->tt_school }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Các môn:</span>
+                                    <span>
+                                        @foreach ($tutor->subjects as $subject)
+                                            {{ $subject->subject_name }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Nhận dạy:</span>
+                                    <span>
+                                        @foreach ($tutor->grades as $grade)
+                                            {{ $grade->grade_name }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div>
+                                    <span class="font-weight-bold">Khu vực:</span>
+                                    <span>
+                                        @foreach ($tutor->districts as $district)
+                                            {{ $district->district_name }}
+                                            @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </span>
+                                </div>
+                                <div class="text-justify">
+                                    <span class="font-weight-bold">Kinh nghiệm:</span>
+                                    <span>{{ $tutor->tt_experiences }}</span>
+                                </div>
+                                <div>
+                                    <span class="font-weight-bold">Học phí/buổi:</span>
+                                    <span>{{ $tutor->tuition->tuition_range }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+    </div> <!-- /.container -->
     </div> <!-- /.untree_co-section -->
 @endsection
