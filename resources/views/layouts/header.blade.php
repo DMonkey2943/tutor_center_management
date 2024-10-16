@@ -45,6 +45,9 @@
                             <li class="font-weight-bold">
                                 <a href="{{ route('tutor.classes') }}">Lớp đã đăng ký nhận dạy</a>
                             </li>
+                            <li class="font-weight-bold">
+                                <a href="{{ route('tutor.classes.teached') }}">Lớp đã nhận dạy</a>
+                            </li>
                         @elseif (Auth::user()->role == 'parent')
                             <li class="font-weight-bold">
                                 <a href="{{ route('parent.classes') }}">Lớp đã đăng ký</a>

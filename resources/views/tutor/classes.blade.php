@@ -79,9 +79,10 @@
                                                         onclick="return confirm('Bạn có chắc chắn muốn hủy đăng ký lớp học mã số {{ $class->class_id }} hay không?')">
                                                 </form>
                                             </div>
-                                        @elseif ($tutor->pivot->status == 1)
+                                        @elseif ($tutor->pivot->status == 1 && $class->class_status == 0)
                                             <div>
-                                                <form action="" method="POST">
+                                                <form action="{{ route('tutor.teachClass', $class->class_id) }}"
+                                                    method="POST">
                                                     @csrf
                                                     <input type="submit" value="Nhận lớp"
                                                         class="btn btn-success p-1 rounded"

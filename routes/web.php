@@ -59,8 +59,9 @@ Route::prefix('tutor')->middleware(['auth', 'role:tutor'])->group(function() {
     Route::get('/', [TutorController::class, 'index'])->name('tutor.account');
     Route::post('/register/class', [TutorController::class, 'registerClass'])->name('tutor.registerClass'); //Dang ky nhan lop
     Route::get('/classes', [TutorController::class, 'showRegisteredClasses'])->name('tutor.classes'); //DS lop da dang ky nhan
-    Route::DELETE('/unregister/class/{class_id}', [TutorController::class, 'unregisterClass'])->name('tutor.unregisterClass'); //Dang ky nhan lop
-
+    Route::DELETE('/unregister/class/{class_id}', [TutorController::class, 'unregisterClass'])->name('tutor.unregisterClass'); //Huy dang ky nhan lop
+    Route::post('/teach/class/{class_id}', [TutorController::class, 'teachClass'])->name('tutor.teachClass'); //Nhan lop
+    Route::get('/classes/teaching', [TutorController::class, 'showTeachedClasses'])->name('tutor.classes.teached'); //DS lop da nhan day
 });
 
 

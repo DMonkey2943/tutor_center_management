@@ -59,4 +59,35 @@ class TutorController extends Controller
             return redirect()->route('tutor.classes')->with('error', 'Hủy đăng ký lớp học mã số '. $class_id .'  thất bại!');
         }
     }
+
+    function showTeachedClasses() {
+        $tt_id = Auth::user()->tutor->tt_id;
+
+        $classes = Class1::where('class_tutor', $tt_id)->get();
+        // dd($classes);
+
+        return view('tutor.teachedClasses', compact('classes'));
+    }
+
+    function teachClass($class_id) {
+        $tt_id = Auth::user()->tutor->tt_id;
+
+        $class = Class1::find($class_id);
+
+        if(!empty($class->class_tutor)) {
+            return redirect()->route('tutor.classes')->with('error', 'Nhận dạy lớp học mã số '. $class_id .'  thất bại!');
+        } 
+        // Cập nhật trạng thái thành -1 của tất cả các gia sư khác trong bảng 'approve' (ngoại trừ gia sư nhận lớp)
+        Approve::where('class_id', $class_id)
+            ->where('tt_id', '!=', $tt_id)
+            ->update(['status' => -1]);
+        
+        $class->class_tutor = $tt_id;
+        $class->class_status = 1; // Cập nhật trạng thái lớp thành đã giao
+        $class->save();     
+
+        dd($class);
+
+        return redirect()->route('tutor.teachedClasses')->with('success', 'Nhận dạy lớp học mã số '. $class_id .'  thành công!');
+    }
 }
