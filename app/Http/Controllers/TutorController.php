@@ -88,4 +88,14 @@ class TutorController extends Controller
 
         return redirect()->route('tutor.teachedClasses')->with('success', 'Nhận dạy lớp học mã số '. $class_id .'  thành công!');
     }
+
+    function showTeachedClassesDetail($class_id) {
+        $class = Class1::find($class_id);
+
+        if(Auth::user()->tutor->tt_id != $class->class_tutor){
+            return redirect()->route('home');
+        }
+
+        return view('tutor.teached_class_detail', compact('class'));
+    }
 }

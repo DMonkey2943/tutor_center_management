@@ -49,8 +49,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('class_detail', ['class_id' => $class->class_id]) }}">Xem chi tiết <i
-                                            class="bi bi-chevron-double-right"></i></a>
+                                    <a href="{{ route('tutor.class_detail.teached', ['class_id' => $class->class_id]) }}">Xem
+                                        chi tiết <i class="bi bi-chevron-double-right"></i></a>
                                 </td>
                             </tr>
                         @endforeach
