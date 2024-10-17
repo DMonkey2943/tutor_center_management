@@ -24,7 +24,39 @@ use Illuminate\Support\Facades\Auth;
 class Parent1Controller extends Controller
 {
     function index() {
+        $user = Auth::user();
+        return view('parent.account', compact('user'));
+    }
+
+    function editAccount() {
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+
+        return view('parent.account_edit', compact('user'));
+    }
+
+    function updateAccount(Request $req) {
+        $validatedData = $req->validate(
+            [
+                'name' => ['required', 'string', ],
+                'phone' => ['required', 
+                            'regex:/^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088|091|094|070|079|077|076|078|090|093|089|056|058|092|059|099)[0-9]{7}$/', 
+                           ],
+            ],
+            [
+                'required' => 'Không được để trống.',
+                'phone.regex' => 'SĐT không hợp lệ.',
+            ],
+        );
+
+        $data = $req->all();
         
+        $user = User::findOrFail(Auth::user()->id);
+        $user->name = $data['name'];
+        $user->phone = $data['phone'];
+        $user->save();
+
+        return redirect()->route('parent.account')->with('success', 'Cập nhật thông tin liên hệ thành công!');
     }
 
     function showFormRegisterClass() {

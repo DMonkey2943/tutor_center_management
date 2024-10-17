@@ -45,6 +45,8 @@ Route::get('/wards/{district_id}', [AuthController::class, 'getWards']);
 // Parent
 Route::prefix('parent')->middleware(['auth', 'role:parent'])->group(function() {
     Route::get('/', [Parent1Controller::class, 'index'])->name('parent.account');
+    Route::get('/account', [Parent1Controller::class, 'editAccount'])->name('parent.account.edit');
+    Route::PATCH('/account', [Parent1Controller::class, 'updateAccount']);
     Route::get('/register/class', [Parent1Controller::class, 'showFormRegisterClass'])->name('parent.registerClass.form');
     Route::post('/register/class', [Parent1Controller::class, 'registerClass'])->name('parent.registerClass');
     Route::get('/classes', [Parent1Controller::class, 'showRegisteredClasses'])->name('parent.classes');
