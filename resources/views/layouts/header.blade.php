@@ -61,8 +61,8 @@
 
                 @auth
                     @if (Auth::user()->role == 'tutor')
-                        <a href="{{ route('tutor.account') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">
-                            TÀI KHOẢN
+                        <a href="{{ route('tutor.profile') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">
+                            HỒ SƠ
                         </a>
                     @elseif (Auth::user()->role == 'parent')
                         <a href="{{ route('parent.account') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">

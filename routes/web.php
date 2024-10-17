@@ -59,7 +59,9 @@ Route::prefix('parent')->middleware(['auth', 'role:parent'])->group(function() {
 
 // Tutor
 Route::prefix('tutor')->middleware(['auth', 'role:tutor'])->group(function() {
-    Route::get('/', [TutorController::class, 'index'])->name('tutor.account');
+    Route::get('/', [TutorController::class, 'index'])->name('tutor.profile');
+    Route::get('/profile', [TutorController::class, 'editProfile'])->name('tutor.profile.edit');
+    Route::PATCH('/profile', [TutorController::class, 'updateProfile']);
     Route::post('/register/class', [TutorController::class, 'registerClass'])->name('tutor.registerClass'); //Dang ky nhan lop
     Route::get('/classes', [TutorController::class, 'showRegisteredClasses'])->name('tutor.classes'); //DS lop da dang ky nhan
     Route::DELETE('/unregister/class/{class_id}', [TutorController::class, 'unregisterClass'])->name('tutor.unregisterClass'); //Huy dang ky nhan lop
