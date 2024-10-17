@@ -230,6 +230,10 @@
                             </div>
                             <div class="col-lg-5">
                                 <div>
+                                    <span class="font-weight-bold">SĐT liên hệ:</span>
+                                    <span class="text-primary">{{ $tutor->user->phone }}</span>
+                                </div>
+                                <div>
                                     <span class="font-weight-bold">Ngày sinh:</span>
                                     <span>{{ \Carbon\Carbon::parse($tutor->tt_birthday)->format('d/m/Y') }}</span>
                                 </div>
