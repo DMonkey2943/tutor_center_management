@@ -12,7 +12,7 @@ class HomeController extends Controller
     }
 
     function classes() {
-        $classes = Class1::orderBy('updated_at', 'desc')->get();
+        $classes = Class1::orderBy('updated_at', 'desc')->paginate(12);
 
         return view('classes', compact('classes',));
     }
@@ -24,7 +24,7 @@ class HomeController extends Controller
     }
 
     function tutors() {
-        $tutors = Tutor::orderBy('updated_at', 'desc')->get();
+        $tutors = Tutor::orderBy('updated_at', 'desc')->paginate(10);
 
         return view('tutors', compact('tutors',));
     }    
