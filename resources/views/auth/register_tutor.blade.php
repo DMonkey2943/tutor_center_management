@@ -98,17 +98,20 @@
                                 {{ $message }}
                             @enderror
                         </span>
-                        <div class="form-group">
-                            @foreach ($districts as $area)
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="area{{ $area->district_id }}"
-                                        value="{{ $area->district_id }}" name="tt_districts[]"
-                                        {{ is_array(old('tt_districts')) && in_array($area->district_id, old('tt_districts')) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="area{{ $area->district_id }}">
-                                        {{ $area->district_name }}
-                                    </label>
-                                </div>
-                            @endforeach
+                        <div class="form-group container-fluid pl-5">
+                            <div class="row">
+                                @foreach ($districts as $area)
+                                    <div class="form-check form-check-inline col-3">
+                                        <input class="form-check-input" type="checkbox" id="area{{ $area->district_id }}"
+                                            value="{{ $area->district_id }}" name="tt_districts[]"
+                                            {{ is_array(old('tt_districts')) && in_array($area->district_id, old('tt_districts')) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="area{{ $area->district_id }}">
+                                            {{ $area->district_name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+                            </div>
                         </div>
 
                         <div class="form-group mb-3">
@@ -236,17 +239,19 @@
                                 {{ $message }}
                             @enderror
                         </span>
-                        <div class="form-group">
-                            @foreach ($subjects as $subj)
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="subj{{ $subj->subject_id }}"
-                                        value="{{ $subj->subject_id }}" name="tt_subjects[]"
-                                        {{ is_array(old('tt_subjects')) && in_array($subj->subject_id, old('tt_subjects')) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="subj{{ $subj->subject_id }}">
-                                        {{ $subj->subject_name }}
-                                    </label>
-                                </div>
-                            @endforeach
+                        <div class="form-group container-fluid pl-5">
+                            <div class="row">
+                                @foreach ($subjects as $subj)
+                                    <div class="form-check form-check-inline col-3">
+                                        <input class="form-check-input" type="checkbox" id="subj{{ $subj->subject_id }}"
+                                            value="{{ $subj->subject_id }}" name="tt_subjects[]"
+                                            {{ is_array(old('tt_subjects')) && in_array($subj->subject_id, old('tt_subjects')) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="subj{{ $subj->subject_id }}">
+                                            {{ $subj->subject_name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <label for="">Khối lớp dạy<span class="text-danger">*</span></label>
                         <span class="text-danger">
@@ -271,7 +276,7 @@
                             <textarea class="form-control" id="inputExperience" rows="5" name="tt_experiences">{{ old('tt_experiences') }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="inputTuition">Học phí/buổi<span class="text-danger">*</span></label>
+                            <label for="inputTuition">Học phí/buổi (VNĐ)<span class="text-danger">*</span></label>
                             <select id="inputTuition" class="form-control" name="tt_tuition">
                                 @foreach ($tuitions as $tuition)
                                     <option value="{{ $tuition->tuition_id }}"

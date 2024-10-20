@@ -58,17 +58,19 @@
                                 {{ $message }}
                             @enderror
                         </span>
-                        <div class="form-group pl-5">
-                            @foreach ($subjects as $subj)
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="subj{{ $subj->subject_id }}"
-                                        value="{{ $subj->subject_id }}" name="subjects[]"
-                                        {{ is_array(old('subjects')) && in_array($subj->subject_id, old('subjects')) ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="subj{{ $subj->subject_id }}">
-                                        {{ $subj->subject_name }}
-                                    </label>
-                                </div>
-                            @endforeach
+                        <div class="form-group pl-5 container-fluid">
+                            <div class="row">
+                                @foreach ($subjects as $subj)
+                                    <div class="form-check form-check-inline col-3">
+                                        <input class="form-check-input" type="checkbox" id="subj{{ $subj->subject_id }}"
+                                            value="{{ $subj->subject_id }}" name="subjects[]"
+                                            {{ is_array(old('subjects')) && in_array($subj->subject_id, old('subjects')) ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="subj{{ $subj->subject_id }}">
+                                            {{ $subj->subject_name }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="inputGrade">Khối lớp<span class="text-danger">*</span></label>
@@ -130,7 +132,7 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="inputTuition">Học phí/buổi<span class="text-danger">*</span></label>
+                            <label for="inputTuition">Học phí/buổi (VNĐ)<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="inputTuition"
                                 placeholder="80.000đ-100.000đ (hoặc Thỏa thuận)" name="tuition"
                                 value="{{ old('tuition') }}">
