@@ -15,7 +15,7 @@
                         <h5 class="font-weight-bold">THÔNG TIN TÀI KHOẢN</h5>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputName">Họ tên</label>
+                                <label for="inputName">Họ tên<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control " id="inputName" name="name"
                                     value="{{ old('name') }}">
                                 <span class="text-danger">
@@ -25,7 +25,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPhone">SĐT</label>
+                                <label for="inputPhone">SĐT<span class="text-danger">*</span></label>
                                 <input type="tel" class="form-control" id="inputPhone" name="phone"
                                     value="{{ old('phone') }}">
                                 <span class="text-danger">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
+                                <label for="inputEmail4">Email<span class="text-danger">*</span></label>
                                 <input type="email" class="form-control" id="inputEmail4" name="email"
                                     value="{{ old('email') }}">
                                 <span class="text-danger">
@@ -47,7 +47,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Mật khẩu</label>
+                                <label for="inputPassword4">Mật khẩu<span class="text-danger">*</span></label>
                                 <input type="password" class="form-control" id="inputPassword4" name="password">
                                 <span class="text-danger">
                                     @error('password')
@@ -60,7 +60,7 @@
                         <h5 class="font-weight-bold mt-4">THÔNG TIN HỒ SƠ</h5>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputGender">Giới tính</label>
+                                <label for="inputGender">Giới tính<span class="text-danger">*</span></label>
                                 <select id="inputGender" class="form-control" name="tt_gender">
                                     <option value="M" {{ old('tt_gender') == 'M' ? 'selected' : '' }}>Nam</option>
                                     <option value="F" {{ old('tt_gender') == 'F' ? 'selected' : '' }}>Nữ</option>
@@ -72,7 +72,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputBirthday">Ngày sinh</label>
+                                <label for="inputBirthday">Ngày sinh<span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="inputBirthday" name="tt_birthday"
                                     value="{{ old('tt_birthday') }}">
                                 <span class="text-danger">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputAddr">Địa chỉ hiện tại</label>
+                            <label for="inputAddr">Địa chỉ hiện tại<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="inputAddr" placeholder="" name="tt_address"
                                 value="{{ old('tt_address') }}">
                             <span class="text-danger">
@@ -92,7 +92,7 @@
                                 @enderror
                             </span>
                         </div>
-                        <label for="">Khu vực dạy</label>
+                        <label for="">Khu vực dạy<span class="text-danger">*</span></label>
                         <span class="text-danger">
                             @error('tt_districts')
                                 {{ $message }}
@@ -112,7 +112,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="img_avatar">Ảnh đại diện</label>
+                            <label for="img_avatar">Ảnh đại diện<span class="text-danger">*</span></label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="img_avatar" name="tt_avatar">
                                 <label class="custom-file-label" for="img_avatar" aria-describedby="img_avatar">Choose
@@ -157,7 +157,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-5">
-                                <label for="inputLevel">Trình độ</label>
+                                <label for="inputLevel">Trình độ<span class="text-danger">*</span></label>
                                 <select id="inputLevel" class="form-control" name="tt_level">
                                     @foreach ($levels as $level)
                                         <option value="{{ $level->level_id }}"
@@ -168,7 +168,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-7">
-                                <label for="inputMajor">Chuyên ngành</label>
+                                <label for="inputMajor">Chuyên ngành<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="inputMajor" placeholder=""
                                     name="tt_major" value="{{ old('tt_major') }}">
                                 <span class="text-danger">
@@ -179,7 +179,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputSchool">Nơi học tập/công tác</label>
+                            <label for="inputSchool">Nơi học tập/công tác<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="inputSchool" placeholder="" name="tt_school"
                                 value="{{ old('tt_school') }}">
                             <span class="text-danger">
@@ -189,7 +189,7 @@
                             </span>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="img_degree">Ảnh bằng cấp / Thẻ sinh viên</label>
+                            <label for="img_degree">Ảnh bằng cấp / Thẻ sinh viên<span class="text-danger">*</span></label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="img_degree" name="tt_degree">
                                 <label class="custom-file-label" for="img_degree">Choose file</label>
@@ -230,7 +230,7 @@
                                 });
                             </script>
                         </div>
-                        <label for="">Môn dạy</label>
+                        <label for="">Môn dạy<span class="text-danger">*</span></label>
                         <span class="text-danger">
                             @error('tt_subjects')
                                 {{ $message }}
@@ -248,7 +248,7 @@
                                 </div>
                             @endforeach
                         </div>
-                        <label for="">Khối lớp dạy</label>
+                        <label for="">Khối lớp dạy<span class="text-danger">*</span></label>
                         <span class="text-danger">
                             @error('tt_grades')
                                 {{ $message }}
@@ -271,7 +271,7 @@
                             <textarea class="form-control" id="inputExperience" rows="5" name="tt_experiences">{{ old('tt_experiences') }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="inputTuition">Học phí/buổi</label>
+                            <label for="inputTuition">Học phí/buổi<span class="text-danger">*</span></label>
                             <select id="inputTuition" class="form-control" name="tt_tuition">
                                 @foreach ($tuitions as $tuition)
                                     <option value="{{ $tuition->tuition_id }}"

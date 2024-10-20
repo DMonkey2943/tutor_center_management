@@ -14,7 +14,7 @@
                         <h5 class="font-weight-bold mt-4">THÔNG TIN LỚP HỌC</h5>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <label for="inputDistrict">Quận/Huyện</label>
+                                <label for="inputDistrict">Quận/Huyện<span class="text-danger">*</span></label>
                                 <select id="inputDistrict" class="form-control" name="district_id">
                                     <option value="">-- Chọn Quận/Huyện --</option>
                                     @foreach ($districts as $district)
@@ -31,7 +31,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputWard">Phường/Xã</label>
+                                <label for="inputWard">Phường/Xã<span class="text-danger">*</span></label>
                                 <select id="inputWard" class="form-control" name="ward_id">
                                     <option value="">-- Chọn Phường/Xã --</option>
                                 </select>
@@ -42,7 +42,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-5">
-                                <label for="inputAddr">Số nhà, tên đường</label>
+                                <label for="inputAddr">Số nhà, tên đường<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="inputAddr" placeholder="Số 1, đường 3/2"
                                     name="addr_detail" value="{{ old('addr_detail') }}">
                                 <span class="text-danger">
@@ -52,7 +52,7 @@
                                 </span>
                             </div>
                         </div>
-                        <label for="">Môn học</label>
+                        <label for="">Môn học<span class="text-danger">*</span></label>
                         <span class="text-danger">
                             @error('subjects')
                                 {{ $message }}
@@ -71,7 +71,7 @@
                             @endforeach
                         </div>
                         <div class="form-group">
-                            <label for="inputGrade">Khối lớp</label>
+                            <label for="inputGrade">Khối lớp<span class="text-danger">*</span></label>
                             <select id="inputGrade" class="form-control" name="grade">
                                 @foreach ($grades as $grade)
                                     <option value="{{ $grade->grade_id }}"
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputSession">Số buổi/tuần</label>
+                                <label for="inputSession">Số buổi/tuần<span class="text-danger">*</span></label>
                                 <select id="inputSession" class="form-control" name="num_of_sessions">
                                     <option value="1" {{ old('num_of_sessions') == 1 ? 'selected' : '' }}>1</option>
                                     <option value="2" {{ old('num_of_sessions') == 2 ? 'selected' : '' }}>2</option>
@@ -104,7 +104,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputStudent">Số người học</label>
+                                <label for="inputStudent">Số người học<span class="text-danger">*</span></label>
                                 <select id="inputStudent" class="form-control" name="num_of_students">
                                     <option value="1" {{ old('num_of_students') == 1 ? 'selected' : '' }}>1</option>
                                     <option value="2" {{ old('num_of_students') == 2 ? 'selected' : '' }}>2</option>
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputTime">Thời gian học</label>
+                            <label for="inputTime">Thời gian học<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="inputTime" placeholder="T2,T4,T6: 18h-19h30"
                                 name="time" value="{{ old('time') }}">
                             <span class="text-danger">
@@ -130,7 +130,7 @@
                             </span>
                         </div>
                         <div class="form-group">
-                            <label for="inputTuition">Học phí/buổi</label>
+                            <label for="inputTuition">Học phí/buổi<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="inputTuition"
                                 placeholder="80.000đ-100.000đ (hoặc Thỏa thuận)" name="tuition"
                                 value="{{ old('tuition') }}">
@@ -144,7 +144,7 @@
                         <h5 class="font-weight-bold mt-4">YÊU CẦU GIA SƯ</h5>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputGenderTt">Giới tính</label>
+                                <label for="inputGenderTt">Giới tính<span class="text-danger">*</span></label>
                                 <select id="inputGenderTt" class="form-control" name="gender_tutor">
                                     <option value="0" selected>Tùy trung tâm</option>
                                     <option value="M" {{ old('tt_gender') == 'M' ? 'selected' : '' }}>Nam gia sư
@@ -159,7 +159,7 @@
                                 </span>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputLevel">Trình độ gia sư</label>
+                                <label for="inputLevel">Trình độ gia sư<span class="text-danger">*</span></label>
                                 <select id="inputLevel" class="form-control" name="level">
                                     <option value="0" selected>Tùy trung tâm</option>
                                     @foreach ($levels as $level)
