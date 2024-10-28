@@ -122,7 +122,7 @@ class Parent1Controller extends Controller
             ]);
         };
 
-        return redirect()->route('home');
+        return redirect()->route('parent.classes')->with('success', 'Đăng ký lớp học thành công.');
     }
 
     function showRegisteredClasses() {
