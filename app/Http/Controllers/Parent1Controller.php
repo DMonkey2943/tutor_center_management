@@ -127,7 +127,7 @@ class Parent1Controller extends Controller
 
     function showRegisteredClasses() {
         $pr_id = Auth::user()->parent->pr_id;
-        $classes = Parent1::findOrFail($pr_id)->classes; // = Class1::where('class_parent', $pr_id)->get();
+        $classes = Parent1::findOrFail($pr_id)->classes()->paginate(12); // = Class1::where('class_parent', $pr_id)->get()->paginate(12);
 
         return view('parent.classes', compact('classes'));
     }
