@@ -122,15 +122,25 @@ class TutorController extends Controller
 
     function registerClass(Request $req) {
         $data = $req->all();
-        // dd($data);
-        $user = Auth::user();
-        $approve = Approve::create([
-            'class_id' => $data['class_id'],
-            'tt_id' => $user->tutor->tt_id,
-            'status' => 0,
-        ]);
+        $class_id = $data['class_id'];
+        $tt_id = Auth::user()->tutor->tt_id;
+        // Kiểm tra xem gia sư đã đăng ký nhận lớp học này chưa
+        $check = Approve::where('class_id', $class_id)
+                        ->where('tt_id', $tt_id)->exists(); 
 
-        return redirect()->route('tutor.classes');
+        if(!$check) {
+            $user = Auth::user();
+            $approve = Approve::create([
+                'class_id' => $class_id,
+                'tt_id' => $user->tutor->tt_id,
+                'status' => 0,
+            ]);
+
+            return redirect()->route('tutor.classes');
+        } else {
+            return redirect()->route('tutor.classes')->with('warning', 'Bạn đã đăng ký nhận lớp học mã số '. $class_id .' rồi! ');
+        }
+
     }
 
     function showRegisteredClasses(){

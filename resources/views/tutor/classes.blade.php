@@ -16,6 +16,11 @@
                     {{ session('error') }}
                 </div>
             @endif
+            @if (session('warning'))
+                <div class="alert alert-warning">
+                    {{ session('warning') }}
+                </div>
+            @endif
             @if ($classes->isEmpty())
                 <p>Bạn chưa đăng ký nhận dạy lớp học nào.</p>
             @else
