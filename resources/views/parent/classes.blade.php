@@ -69,6 +69,12 @@
                                         Nam/Nữ
                                     @endif
                                 </p>
+                                @php
+                                    $check = App\Models\Approve::where('class_id', $class->class_id)->exists(); //Kiểm tra xem lớp chưa giao có GS nào nhận lớp chưa để duyệt
+                                @endphp
+                                @if ($check && $class->class_status == 0)
+                                    <p class="alert alert-warning">Đã có gia sư đăng ký nhận lớp!</p>
+                                @endif
                             </div>
 
                             <div class="text-right">
