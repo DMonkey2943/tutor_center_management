@@ -222,7 +222,7 @@ class Parent1Controller extends Controller
             $approve->status = 1;
             $approve->save();
 
-            return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('success', 'Duyệt gia sư mã số'. $tutor_id .' thành công!');
+            return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('success', 'Duyệt gia sư mã số '. $tutor_id .' thành công!');
         } else {
             return redirect()->route('parent.class_details', ['class_id' => $class_id])->with('error', 'Duyệt gia sư mã số '. $tutor_id .' thất bại.');
         }
