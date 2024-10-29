@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Parent1Controller;
 use App\Http\Controllers\TutorController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -74,7 +75,8 @@ Route::prefix('tutor')->middleware(['auth', 'role:tutor'])->group(function() {
 
 // Admin
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
-    
+    Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/tutors', [AdminController::class, 'tutorList'])->name('admin.tutors');
 });
 
 
