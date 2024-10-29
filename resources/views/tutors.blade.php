@@ -35,10 +35,10 @@
                                 class="rounded" height="140px" width="140px">
                         </div>
                         <div class="col-lg-5">
-                            <div>
+                            {{-- <div>
                                 <span class="font-weight-bold">Ngày sinh:</span>
                                 <span>{{ \Carbon\Carbon::parse($tt->tt_birthday)->format('d/m/Y') }}</span>
-                            </div>
+                            </div> --}}
                             <div>
                                 <span class="font-weight-bold">Trình độ:</span>
                                 <span>{{ $tt->level->level_name }}</span>
@@ -47,10 +47,10 @@
                                 <span class="font-weight-bold">Chuyên ngành:</span>
                                 <span>{{ $tt->tt_major }}</span>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <span class="font-weight-bold">Nơi học tập/công tác:</span>
                                 <span>{{ $tt->tt_school }}</span>
-                            </div>
+                            </div> --}}
                             <div>
                                 <span class="font-weight-bold">Các môn:</span>
                                 <span>
@@ -73,8 +73,6 @@
                                     @endforeach
                                 </span>
                             </div>
-                        </div>
-                        <div class="col-lg-5">
                             <div>
                                 <span class="font-weight-bold">Khu vực:</span>
                                 <span>
@@ -86,15 +84,17 @@
                                     @endforeach
                                 </span>
                             </div>
+                        </div>
+                        <div class="col-lg-5">
                             <div class="text-justify">
                                 <span class="font-weight-bold">Kinh nghiệm:</span>
                                 <span>{{ $tt->tt_experiences }}</span>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <span class="font-weight-bold">Học phí/buổi:</span>
                                 <span>{{ $tt->tuition->tuition_range }}</span>
-                            </div>
-                            <div>
+                            </div> --}}
+                            <div class="mt-3 text-right">
                                 <span class="">Cập nhật:</span>
                                 <span>{{ \Carbon\Carbon::parse($tt->updated_at)->format('d/m/Y') }}</span>
                             </div>
