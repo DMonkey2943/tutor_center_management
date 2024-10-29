@@ -84,7 +84,7 @@
                             {{ \Carbon\Carbon::parse($class->updated_at)->format('d/m/Y') }}
                         </p>
 
-                        @if (Auth::check() && Auth::user()->role == 'tutor' && $class->class_satus == 0)
+                        @if (Auth::check() && Auth::user()->role == 'tutor' && Auth::user()->tutor->tt_status == 1 && $class->class_status == 0)
                             <div class="text-right">
                                 <form action="{{ route('tutor.registerClass') }}" method="POST">
                                     @csrf
