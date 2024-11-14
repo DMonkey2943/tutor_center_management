@@ -80,4 +80,6 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
     Route::get('/tutors/approve', [AdminController::class, 'approvedTutorList'])->name('admin.approvedTutors');
     Route::PATCH('/tutors/approve{tutor_id}', [AdminController::class, 'approveTutor'])->name('admin.approveTutor');
     Route::get('/tutor/{tutor_id}', [AdminController::class, 'showProfileDetail'])->name('admin.tutor_detail');
+    Route::get('/parents', [AdminController::class, 'parentList'])->name('admin.parents');
+    Route::get('/classes', [AdminController::class, 'classList'])->name('admin.classes');
 });

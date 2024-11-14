@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Tutor;
+use App\Models\Parent1;
+use App\Models\Class1;
 
 use Illuminate\Http\Request;
 
@@ -12,7 +14,8 @@ class AdminController extends Controller
     }
 
     function tutorList() {
-        $tutors = Tutor::orderBy('updated_at', 'asc')->paginate(10);
+        // $tutors = Tutor::orderBy('updated_at', 'asc')->paginate(10);
+        $tutors = Tutor::orderBy('updated_at', 'asc')->get();
 
         return view('admin.tutors', compact('tutors',));
     }
@@ -41,5 +44,19 @@ class AdminController extends Controller
             return redirect()->route('admin.approvedTutors')->with('error', 'Duyệt hồ sơ Gia sư mã số '. $tutor_id .' thất bại');
         }
     }
+
+    function parentList() {
+        $parents = Parent1::all();
+
+        return view('admin.parents', compact('parents',));
+    }
+
+    function classList() {
+        // $classes = Class1::orderBy('updated_at', 'asc')->paginate(10);
+        $classes = Class1::orderBy('updated_at', 'asc')->get();
+
+        return view('admin.classes', compact('classes',));
+    }
+
 
 }
