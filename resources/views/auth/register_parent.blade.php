@@ -179,7 +179,7 @@
                                 @enderror
                             </span>
                         </div>
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="inputTuition">Học phí/buổi (VNĐ)<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="inputTuition"
                                 placeholder="80.000đ-100.000đ (hoặc Thỏa thuận)" name="tuition"
@@ -189,7 +189,61 @@
                                     {{ $message }}
                                 @enderror
                             </span>
+                        </div> --}}
+                        <label for="tuition">Học phí/buổi (VNĐ)<span class="text-danger">*</span></label>
+                        <div class="form-row">
+                            <div class="form-group col-md-3 m-0 ml-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tuition_type"
+                                        id="fixed_tuition" value="fixed"
+                                        {{ old('tuition') != 'Thỏa thuận' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="fixed_tuition">Học phí cố định</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tuition_type"
+                                        id="negotiable_tuition" value="negotiable"
+                                        {{ old('tuition') == 'Thỏa thuận' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="negotiable_tuition">Thỏa thuận</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <div id="fixed_tuition_input" class="mt-2"
+                                    style="{{ old('tuition') == 'Thỏa thuận' ? 'display: none;' : '' }}">
+                                    <input type="text" class="form-control" id="inputTuition"
+                                        placeholder="Nhập học phí: 100000" name="tuition"
+                                        value="{{ old('tuition') != 'Thỏa thuận' ? old('tuition') : '' }}">
+                                    <span class="text-danger">
+                                        @error('tuition')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const fixedTuitionRadio = document.getElementById('fixed_tuition');
+                                const negotiableTuitionRadio = document.getElementById('negotiable_tuition');
+                                const fixedTuitionInput = document.getElementById('fixed_tuition_input');
+                                const tuitionInput = document.getElementById('inputTuition');
+
+                                fixedTuitionRadio.addEventListener('change', function() {
+                                    if (fixedTuitionRadio.checked) {
+                                        fixedTuitionInput.style.display = 'block';
+                                        tuitionInput.setAttribute('name', 'tuition'); // Sử dụng input này
+                                        tuitionInput.value = ''; // Xóa giá trị trước đó nếu có
+                                    }
+                                });
+
+                                negotiableTuitionRadio.addEventListener('change', function() {
+                                    if (negotiableTuitionRadio.checked) {
+                                        fixedTuitionInput.style.display = 'none';
+                                        tuitionInput.setAttribute('name', 'tuition'); // Sử dụng chính input này
+                                        tuitionInput.value = 'Thỏa thuận'; // Gán giá trị khi chọn
+                                    }
+                                });
+                            });
+                        </script>
 
                         <h5 class="font-weight-bold mt-4">YÊU CẦU GIA SƯ</h5>
                         <div class="form-row">

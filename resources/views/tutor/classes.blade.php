@@ -51,7 +51,8 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $class->grade->grade_name }}</td>
-                                <td>{{ $class->class_tuition }}</td>
+                                <td>{{ $class->class_tuition === 'Thỏa thuận' ? 'Thỏa thuận' : number_format($class->class_tuition, 0, ',', '.') . ' VNĐ' }}
+                                </td>
                                 <td>
                                     @if ($class->class_status == 0)
                                         Chưa giao

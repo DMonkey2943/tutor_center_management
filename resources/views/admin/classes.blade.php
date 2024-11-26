@@ -67,7 +67,10 @@
                                     </p>
                                     <p><strong>Số học viên:</strong> {{ $class->class_num_of_students }}</p>
                                     <p><strong>Số buổi/tuần:</strong> {{ $class->class_num_of_sessions }}</p>
-                                    <p><strong>Mức lương/buổi:</strong> {{ $class->class_tuition }}</p>
+                                    <p>
+                                        <strong>Mức lương/buổi:</strong>
+                                        {{ $class->class_tuition === 'Thỏa thuận' ? 'Thỏa thuận' : number_format($class->class_tuition, 0, ',', '.') . ' VNĐ' }}
+                                    </p>
                                     <p><strong>Thời gian:</strong> {{ $class->class_time }}</p>
 
                                     <h5 class="font-weight-bold mt-4">YÊU CẦU GIA SƯ</h5>

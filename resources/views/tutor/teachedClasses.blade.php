@@ -20,7 +20,7 @@
                             <th>Mã lớp</th>
                             <th>Môn học</th>
                             <th>Khối lớp</th>
-                            <th>Học phí</th>
+                            <th>Mức lương</th>
                             <th>Trạng thái lớp học</th>
                             <td>Tùy chọn</td>
                         </tr>
@@ -40,7 +40,9 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $class->grade->grade_name }}</td>
-                                <td>{{ $class->class_tuition }}</td>
+                                <td>
+                                    {{ $class->class_tuition === 'Thỏa thuận' ? 'Thỏa thuận' : number_format($class->class_tuition, 0, ',', '.') . ' VNĐ' }}
+                                </td>
                                 <td>
                                     @if ($class->class_status == 0)
                                         Chưa giao

@@ -57,8 +57,8 @@
                             {{ $class->class_num_of_sessions }}
                         </p>
                         <p>
-                            <span class="font-weight-bold">Mức lương/buổi: </span>
-                            {{ $class->class_tuition }}
+                            <span class="font-weight-bold">Học phí/buổi: </span>
+                            {{ $class->class_tuition === 'Thỏa thuận' ? 'Thỏa thuận' : number_format($class->class_tuition, 0, ',', '.') . ' VNĐ' }}
                         </p>
                         <p>
                             <span class="font-weight-bold">Thời gian: </span>

@@ -52,7 +52,12 @@ class AuthController extends Controller
                 'num_of_sessions' => ['required'],
                 'num_of_students' => ['required'],
                 'time' => ['required'],
-                'tuition' => ['required'],
+                // 'tuition' => ['required'],
+                'tuition' => ['required', function ($attribute, $value, $fail) use ($req) {
+                    if ($value !== 'Thỏa thuận' && (!is_numeric($value) || $value < 50000 || $value > 1000000)) {
+                        $fail('Học phí không hợp lệ.');
+                    }
+                }],
                 'gender_tutor' => ['required'],
                 'level' => ['required'],
                 'request' => [],
