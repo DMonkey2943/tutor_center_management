@@ -25,36 +25,62 @@
         <div class="container">
             {{-- Filter form --}}
             <div class="row text-center mb-5" style="display: block;">
-                <form>
+                <form method="GET">
+                    {{-- @csrf --}}
                     <div class="form-row justify-content-center">
                         <div class="col-12 col-md-6 col-lg-4 mb-2">
-                            <select class="form-control">
-                                <option selected>Khu vực</option>
-                                <option>...</option>
+                            <select class="form-control" name="district">
+                                <option value="" selected>-- Chọn Khu vực --</option>
+                                @foreach ($districts as $district)
+                                    <option value="{{ $district->district_id }}"
+                                        {{ request('district') == $district->district_id ? 'selected' : '' }}>
+                                        {{ $district->district_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-2">
-                            <select class="form-control">
-                                <option selected>Trình độ</option>
-                                <option>...</option>
+                            <select class="form-control" name="level">
+                                <option value="" selected>-- Chọn Trình độ gia sư --</option>
+                                @foreach ($levels as $level)
+                                    <option value="{{ $level->level_id }}"
+                                        {{ request('level') == $level->level_id ? 'selected' : '' }}>
+                                        {{ $level->level_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-2">
-                            <select class="form-control">
-                                <option selected>Giới tính</option>
-                                <option>...</option>
+                            <select class="form-control" name="gender">
+                                <option value="" selected>-- Chọn Giới tính gia sư --</option>
+                                <option value="M" {{ request('gender') == 'M' ? 'selected' : '' }}>
+                                    Nam gia sư
+                                </option>
+                                <option value="F" {{ request('gender') == 'F' ? 'selected' : '' }}>
+                                    Nữ gia sư
+                                </option>
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-2">
-                            <select class="form-control">
-                                <option selected>Môn học</option>
-                                <option>...</option>
+                            <select class="form-control" name="subject">
+                                <option value="" selected>-- Chọn Môn học --</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->subject_id }}"
+                                        {{ request('subject') == $subject->subject_id ? 'selected' : '' }}>
+                                        {{ $subject->subject_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-2">
-                            <select class="form-control">
-                                <option selected>Khối lớp</option>
-                                <option>Ôn thi trường chuyên</option>
+                            <select class="form-control" name="grade">
+                                <option value="" selected>-- Chọn Khối lớp --</option>
+                                @foreach ($grades as $grade)
+                                    <option value="{{ $grade->grade_id }}"
+                                        {{ request('grade') == $grade->grade_id ? 'selected' : '' }}>
+                                        {{ $grade->grade_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-12 col-md-6 col-lg-4 mb-2">
@@ -125,8 +151,8 @@
 
                             <div class="text-right">
                                 <p class="mb-0"><a
-                                        href="{{ route('class_detail', ['class_id' => $class->class_id]) }}">Xem chi tiết <i
-                                            class="bi bi-chevron-double-right"></i></a></p>
+                                        href="{{ route('class_detail', ['class_id' => $class->class_id]) }}">Xem chi tiết
+                                        <i class="bi bi-chevron-double-right"></i></a></p>
                             </div>
                         </div>
                     </div>
