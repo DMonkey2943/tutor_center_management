@@ -7,7 +7,16 @@
             huynh
             học sinh những gia sư tốt đã được chọn lọc kỹ càng và phù hợp với yêu cầu riêng biệt của từng học viên.</p>
     </div>
-    @guest
+    @if (Auth::check())
+        @if (Auth::user()->role == 'parent')
+            <p class="mb-4" data-aos="fade-up" data-aos-delay="300"></p>
+            <a href="{{ route('parent.registerClass.form') }}" class="mb-3 ml-2 mr-2 btn btn-secondary">
+                <i class="bi bi-plus-circle-fill"></i>
+                Đăng ký lớp học
+            </a>
+            </p>
+        @endif
+    @else
         <div class="mb-1 text-white desc mx-auto" data-aos="fade-up" data-aos-delay="200">
             <p>Phụ huynh có nhu cầu đăng ký lớp học để tìm gia sư vui lòng đăng ký tài khoản.</p>
         </div>
@@ -18,7 +27,7 @@
                 Đăng ký tìm gia sư
             </a>
         </p>
-    @endguest
+    @endif
 @endsection
 @section('content')
     {{-- Banner --}}

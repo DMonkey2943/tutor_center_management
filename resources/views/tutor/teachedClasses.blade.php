@@ -20,7 +20,7 @@
                             <th>Mã lớp</th>
                             <th>Môn học</th>
                             <th>Khối lớp</th>
-                            <th>Mức lương</th>
+                            <th>Mức lương/buổi</th>
                             <th>Trạng thái lớp học</th>
                             <td>Tùy chọn</td>
                         </tr>

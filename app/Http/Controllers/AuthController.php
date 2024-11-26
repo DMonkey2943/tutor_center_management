@@ -251,9 +251,24 @@ class AuthController extends Controller
             'email' => $req->email,
             'password' => $req->password,
         ])) {
+            // Tạo lại session
             $req->session()->regenerate();
  
-            return redirect()->intended('/');
+            // Lấy role của người dùng
+            $userRole = Auth::user()->role;
+
+            // Điều hướng dựa trên role
+            switch ($userRole) {
+                case 'admin':
+                    return redirect()->route('admin.dashboard');
+                case 'tutor':
+                    return redirect()->route('tutor.classes');
+                case 'parent':
+                    return redirect()->route('parent.classes');
+                default:
+                    // Nếu role không xác định, chuyển hướng đến trang mặc định
+                    return redirect()->route('home');
+            }
         }
 
         return redirect()->route('login.form')->with('error', 'Email hoặc mật khẩu không chính xác.');

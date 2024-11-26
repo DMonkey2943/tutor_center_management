@@ -30,7 +30,7 @@
                             <th>Mã lớp</th>
                             <th>Môn học</th>
                             <th>Khối lớp</th>
-                            <th>Học phí</th>
+                            <th>Mức lương/buổi</th>
                             <th>Trạng thái lớp học</th>
                             <th>Trạng thái xét duyệt</th>
                             <th>Tùy chọn</th>
