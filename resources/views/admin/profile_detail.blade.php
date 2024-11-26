@@ -51,7 +51,7 @@
                     <img src="{{ asset('storage/' . $tutor->tt_degree) }}" alt="" width="420px">
                 </div>
             </div>
-            <div class="col-12 col-lg-8" style="">
+            <div class="col-12 offset-lg-1 col-lg-7" style="">
                 <div class="mb-3">
                     <span class="font-weight-bold">Giới tính:</span>
                     <span>

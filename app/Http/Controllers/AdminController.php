@@ -10,12 +10,17 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     function index() {
-        return view('admin.dashboard');
+        $totalTutors = Tutor::count();
+        $totalPendingTutors = Tutor::where('tt_status', 0)->count();
+        $totalParents = Parent1::count();
+        $totalClasses = Class1::count();
+
+        return view('admin.dashboard', compact('totalClasses', 'totalTutors', 'totalPendingTutors', 'totalParents'));
     }
 
     function tutorList() {
         // $tutors = Tutor::orderBy('updated_at', 'asc')->paginate(10);
-        $tutors = Tutor::orderBy('updated_at', 'asc')->get();
+        $tutors = Tutor::get();
 
         return view('admin.tutors', compact('tutors',));
     }
@@ -53,7 +58,7 @@ class AdminController extends Controller
 
     function classList() {
         // $classes = Class1::orderBy('updated_at', 'asc')->paginate(10);
-        $classes = Class1::orderBy('updated_at', 'asc')->get();
+        $classes = Class1::get();
 
         return view('admin.classes', compact('classes',));
     }

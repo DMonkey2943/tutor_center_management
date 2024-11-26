@@ -51,9 +51,20 @@
         padding: 20px;
     }
 
-    /* .table-container {
-        background-color: #f8f9fc;
-        padding: 20px;
-        border-radius: 5px;
-    } */
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h6 {
+        font-size: 18px;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .card .icon {
+        font-size: 20px;
+        color: #d1d1d1;
+    }
 </style>
