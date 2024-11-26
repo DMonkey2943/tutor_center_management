@@ -68,6 +68,10 @@
                         <a href="{{ route('parent.account') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">
                             TÀI KHOẢN
                         </a>
+                    @elseif (Auth::user()->role == 'admin')
+                        <a href="{{ route('admin.dashboard') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">
+                            QUẢN LÝ
+                        </a>
                     @endif
                 @else
                     <a href="{{ route('login.form') }}" class="btn-book btn btn-secondary btn-sm menu-absolute">ĐĂNG
